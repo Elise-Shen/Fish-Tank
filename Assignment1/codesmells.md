@@ -76,26 +76,25 @@ instead of changing the numbers at different locations.
 
 ============================================================
 
-## Code Smell 4: [Write the code smell name]
+## Code Smell 4: Duplicate Code
 
-### Code Smell Category: [Write the code smell category name]
+### Code Smell Category: Dispensables
 
 ### List of classes and line numbers involved:
-
-* [Write a class and list of line numbers, one class per asterisk, that describe the smell]
+FishTank.java, main method Line 31 - Line 50
 
 ### Description:
+This part of code creates objects Fish
+Line 31-32 is duplicated with Line 47-48
+Line 33-34 is duplicated with Line 49-50
+Line 41-42 is duplicated with Line 43-44
 
-[In your own words, explain how the description of the code smell applies to this particular code.]
 
 ### Solution:
-
-[In your own words, explain how you might solve this code smell:
-how would you refactor the code?]
+Delete the duplicated Line
 
 ### Explanation
-
-[How does your solution get rid of the code smell? Write your explanation here.]
+Delete Line 47-48, 49-50, 43-44. There's no duplication anymore.
 
 ============================================================
 
