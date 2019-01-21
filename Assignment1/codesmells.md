@@ -54,26 +54,25 @@ and add method calls for 4 new methods
 
 ============================================================
 
-## Code Smell 3: [Write the code smell name]
+## Code Smell 3: Primitive Obsession
 
-### Code Smell Category: [Write the code smell category name]
+### Code Smell Category: Bloaters
 
 ### List of classes and line numbers involved:
-
-* [Write a class and list of line numbers, one class per asterisk, that describe the smell]
-
+FishTank.java, Line 14, Line 68, Line 69
 ### Description:
-
-[In your own words, explain how the description of the code smell applies to this particular code.]
+Instead of using constants charWidth and charHeight,
+numbers are used directly instead
 
 ### Solution:
-
-[In your own words, explain how you might solve this code smell:
-how would you refactor the code?]
+Replace '6','10' at those location into 'charWidth','charHeight'
 
 ### Explanation
+After the replacing, is much more convenient if the developer
+wants to change the value of width and height.
+The developer only need to update the value for charWidth and charHeight,
+instead of changing the numbers at different locations.
 
-[How does your solution get rid of the code smell? Write your explanation here.]
 
 ============================================================
 
