@@ -30,26 +30,27 @@ Therefore, each method contains less than 10 line.
 
 ============================================================
 
-## Code Smell 2: [Write the code smell name]
+## Code Smell 2: Switch Statements
 
-### Code Smell Category: [Write the code smell category name]
+### Code Smell Category: Object Orientation Abusers
 
 ### List of classes and line numbers involved:
 
-* [Write a class and list of line numbers, one class per asterisk, that describe the smell]
+Fish.java, method <reverseAppearance>, Line 66-75
 
 ### Description:
-
-[In your own words, explain how the description of the code smell applies to this particular code.]
+As a OOP language. java doesn't recommend the use of switch statements.
 
 ### Solution:
-
-[In your own words, explain how you might solve this code smell:
-how would you refactor the code?]
+Separate the cases into different methods.
 
 ### Explanation
-
-[How does your solution get rid of the code smell? Write your explanation here.]
+put the cases ")","(" into method <round_bracket>
+put the cases "<",">" into method <angle_brackets>
+put the cases "{","}" into method <curly_brackets>
+put the cases "[", "]" into method <square brackets>
+After all, delete the switch statement
+and add method calls for 4 new methods
 
 ============================================================
 
