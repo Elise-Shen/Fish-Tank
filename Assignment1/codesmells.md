@@ -5,26 +5,28 @@ easy to learn. Hash marks (the number sign) indicate headers. Asterisks indicate
 
 # List of code smells
 
-## Code Smell 1: [Write the code smell name]
+## Code Smell 1: Long Method
 
-### Code Smell Category: [Write the code smell category name]
+### Code Smell Category: Bloaters
 
 ### List of classes and line numbers involved:
 
-* [Write a class and list of line numbers, one class per asterisk, that describe the smell]
+Seaweed.java, method <name> is draw, Line 44-65
 
 ### Description:
 
-[In your own words, explain how the description of the code smell applies to this particular code.]
+The method contains more than 10 lines.
 
 ### Solution:
 
-[In your own words, explain how you might solve this code smell:
-how would you refactor the code?]
+I will extract the method.
 
 ### Explanation
 
-[How does your solution get rid of the code smell? Write your explanation here.]
+Separate method draw into 2 method,
+method <draw_odd> contains the code for seaweed segment is odd numbered.
+method <draw_even> contains the code for seaweed segment is even numbered.
+Therefore, each method contains less than 10 line.
 
 ============================================================
 
