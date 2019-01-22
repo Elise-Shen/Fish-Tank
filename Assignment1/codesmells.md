@@ -98,25 +98,28 @@ Delete Line 47-48, 49-50, 43-44. There's no duplication anymore.
 
 ============================================================
 
-## Code Smell 5: [Write the code smell name]
+## Code Smell 5: Alternative Classes with Different Interfaces
 
-### Code Smell Category: [Write the code smell category name]
+### Code Smell Category: Object Orientation Abusers
 
 ### List of classes and line numbers involved:
-
-* [Write a class and list of line numbers, one class per asterisk, that describe the smell]
+Fish.java and HungryFish.java have several identical methods
 
 ### Description:
-
-[In your own words, explain how the description of the code smell applies to this particular code.]
+Lots of same method and instance in HungryFish class and Fish class
+like methods <setLocation>, <blowBubble>,<turnAround>,<drawString>, <draw>, <move>
+and part of <reverseAppearance>
 
 ### Solution:
-
-[In your own words, explain how you might solve this code smell:
-how would you refactor the code?]
+Make Hungry Fish the subclass of Fish
 
 ### Explanation
+Make Hungry Fish the subclass of Fish.
+For the instance, set appearance = "><MEHUNGRY>" for Hungry Fish, other same as Fish
+put methods <setLocation>, <blowBubble>,<turnAround>,<drawString>, <draw>, <move> in Fish,
+as a subclass, HungryFish can inheritance these methods to use
+For method original <reverseAppearance> in Hungry Fish, used Fish.reverseAppearance to instead the common part
+    , then add the different part in <reverseAppearane> in Hungry Fish
 
-[How does your solution get rid of the code smell? Write your explanation here.]
 
 ============================================================
