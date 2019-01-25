@@ -171,6 +171,7 @@ public class Fish {
 
         } else if (!goingRight && c>=1) {
             c -= 1;//left
+
         }
     }
 }
