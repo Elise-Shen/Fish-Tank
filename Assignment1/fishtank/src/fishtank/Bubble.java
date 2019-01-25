@@ -31,8 +31,8 @@ public class Bubble {
      */
     public Bubble() {
         // Get a nice-looking grey for the bubble
-         colour = Color.gray.darker().darker().darker();
-         // start off with . as the appearance
+        colour = Color.gray.darker().darker().darker();
+        // start off with . as the appearance
         appearance = ".";
     }
 
@@ -43,9 +43,9 @@ public class Bubble {
      */
     public void setLocation(int a, int b) {
         // set x to a
-      x = a;
+        x = a;
         // set y to b
-      y = b;
+        y = b;
     }
 
     /**
@@ -87,11 +87,11 @@ public class Bubble {
 
         // Figure out whether to grow, if at all.
         d = Math.random();
-          // Oocasinally change a . to a o or a o to a O
+        // Oocasinally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals("."))appearance="o";
-            // If the appearance is an o, change it to a O
+                // If the appearance is an o, change it to a O
             else if (appearance.equals("o"))appearance="O";
         }
     }    /**
@@ -101,15 +101,15 @@ public class Bubble {
 
         // Move upwards.
         y--;
-         x -= 1; //left
+        x -= 1; //left
 
         // Figure out whether to grow, if at all.
-          d = Math.random();
-          // Oocasinally change a . to a o or a o to a O
+        d = Math.random();
+        // Oocasinally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals(".")) appearance = "o";
-            // If the appearance is an o, change it to a O
+                // If the appearance is an o, change it to a O
             else if (appearance.equals("o")) appearance = "O";
         }
     }
@@ -120,14 +120,14 @@ public class Bubble {
 
         // Move upwards.
         y--;
-x += 1;// right
+        x += 1;// right
         // Figure out whether to grow, if at all.
         d = Math.random();
-          // Oocasinally change a . to a o or a o to a O
+        // Oocasinally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals("."))appearance="o";
-            // If the appearance is an o, change it to a O
+                // If the appearance is an o, change it to a O
             else if (appearance.equals("o"))appearance="O";
         }
     }
