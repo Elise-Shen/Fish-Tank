@@ -20,7 +20,7 @@ The method contains more than 10 lines.
 ### Solution:
 
 I will extract the method.
-Separate method <draw> into 2 method,
+Separate method <draw> into 2 new created method,
 method <draw_odd> contains the code for seaweed segment is odd numbered.
 method <draw_even> contains the code for seaweed segment is even numbered.
 Therefore, each method contains less than 10 line.
@@ -42,19 +42,19 @@ Fish.java, method <reverseAppearance>, Line 66-75
 From line 66-75, there's a switch statement with 8 cases.
 
 ### Solution:
-Separate the cases into different methods.
+Separate the cases into new created methods.
 put the cases ")","(" into method <round_bracket>
 put the cases "<",">" into method <angle_brackets>
 put the cases "{","}" into method <curly_brackets>
 put the cases "[", "]" into method <square brackets>
 After all, delete the switch statement
-and add method calls for 4 new methods
+and add method calls for 4 new metho
 
 ### Explanation
 As a OOP language. java doesn't recommend the use of switch statements.
 If switch statements are scattered in different parts in the program,
 all the switch statements must be changed if a new condition is added.
-By extracting and moving method, the problem can be solved.
+By extracting and moving method, the problem can be solved, and the code organization is proved
 
 ============================================================
 
@@ -73,6 +73,7 @@ Delete these 2 variables.
 
 ### Explanation:
 Since the variables are unused, keeping them might cause confuses for other users.
+Deleting dead code can also reduce the code size and make future updates become simpler
 
 ============================================================
 
@@ -97,7 +98,7 @@ Delete Line 47-48, 49-50, 43-44. There's no duplication anymore.
 ### Explanation
 The duplicated Code will caused 2 exactly same objects being created.
 The one created later will replace the one created earlier.
-Therefore, it's no use to create 2 of them.
+Therefore, it's no need to create 2 of them.
 
 ============================================================
 
