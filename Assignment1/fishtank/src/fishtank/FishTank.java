@@ -107,8 +107,10 @@ public class FishTank {
                         Bubble heybub = (Bubble) myLittleFishies[a][b];
 
 
+                        // PROBLEM 4: BUBBLE DISAPPEAR
                         if (heybub.y<0){
                             myLittleFishies[a][b] = null;}
+
                         else{
                             heybub.d = Math.random();
                             if (heybub.d < 0.33) heybub.floatStraightUp();
@@ -132,3 +134,7 @@ public class FishTank {
 
     }
 }
+
+
+
+
