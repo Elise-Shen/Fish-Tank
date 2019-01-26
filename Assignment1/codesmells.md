@@ -11,7 +11,7 @@ easy to learn. Hash marks (the number sign) indicate headers. Asterisks indicate
 
 ### List of classes and line numbers involved:
 
-Seaweed.java, method <name> is draw, Line 44-65
+Seaweed.java, method <draw>, Line 44-65
 
 ### Description:
 
@@ -20,13 +20,13 @@ The method contains more than 10 lines.
 ### Solution:
 
 I will extract the method.
-
-### Explanation
-
-Separate method draw into 2 method,
+Separate method <draw> into 2 method,
 method <draw_odd> contains the code for seaweed segment is odd numbered.
 method <draw_even> contains the code for seaweed segment is even numbered.
 Therefore, each method contains less than 10 line.
+
+### Explanation
+Therefore, each method is less than 10 lines. It will be easier to read and update in the future.
 
 ============================================================
 
@@ -39,12 +39,10 @@ Therefore, each method contains less than 10 line.
 Fish.java, method <reverseAppearance>, Line 66-75
 
 ### Description:
-As a OOP language. java doesn't recommend the use of switch statements.
+From line 66-75, there's a switch statement with 8 cases.
 
 ### Solution:
 Separate the cases into different methods.
-
-### Explanation
 put the cases ")","(" into method <round_bracket>
 put the cases "<",">" into method <angle_brackets>
 put the cases "{","}" into method <curly_brackets>
@@ -52,27 +50,29 @@ put the cases "[", "]" into method <square brackets>
 After all, delete the switch statement
 and add method calls for 4 new methods
 
+### Explanation
+As a OOP language. java doesn't recommend the use of switch statements.
+If switch statements are scattered in different parts in the program,
+all the switch statements must be changed if a new condition is added.
+By extracting and moving method, the problem can be solved.
+
 ============================================================
 
-## Code Smell 3: Primitive Obsession
+## Code Smell 3: Dead Code
 
-### Code Smell Category: Bloaters
+### Code Smell Category: Dispensables
 
 ### List of classes and line numbers involved:
-FishTank.java, Line 14, Line 68, Line 69
+FishTank.java, Line 10, Line 12
+
 ### Description:
-Instead of using constants charWidth and charHeight,
-numbers are used directly instead
+variable <charWidth>, <charHeight> are not used after being defined
 
 ### Solution:
-Replace '6','10' at those location into 'charWidth','charHeight'
+Delete these 2 variables.
 
-### Explanation
-After the replacing, is much more convenient if the developer
-wants to change the value of width and height.
-The developer only need to update the value for charWidth and charHeight,
-instead of changing the numbers at different locations.
-
+### Explanation:
+Since the variables are unused, keeping them might cause confuses for other users.
 
 ============================================================
 
@@ -81,7 +81,7 @@ instead of changing the numbers at different locations.
 ### Code Smell Category: Dispensables
 
 ### List of classes and line numbers involved:
-FishTank.java, main method Line 31 - Line 50
+FishTank.java, main method, Line 31 - Line 50
 
 ### Description:
 This part of code creates objects Fish
@@ -92,34 +92,34 @@ Line 41-42 is duplicated with Line 43-44
 
 ### Solution:
 Delete the duplicated Line
+Delete Line 47-48, 49-50, 43-44. There's no duplication anymore.
 
 ### Explanation
-Delete Line 47-48, 49-50, 43-44. There's no duplication anymore.
+The duplicated Code will caused 2 exactly same objects being created.
+The one created later will replace the one created earlier.
+Therefore, it's no use to create 2 of them.
 
 ============================================================
 
-## Code Smell 5: Alternative Classes with Different Interfaces
+## Code Smell 5: Primitive Obsession
 
-### Code Smell Category: Object Orientation Abusers
+### Code Smell Category: Bloaters
 
 ### List of classes and line numbers involved:
-Fish.java and HungryFish.java have several identical methods
+Fish.java, Line 14
 
 ### Description:
-Lots of same method and instance in HungryFish class and Fish class
-like methods <setLocation>, <blowBubble>,<turnAround>,<drawString>, <draw>, <move>
-and part of <reverseAppearance>
+Constants are supposed to be used for coding information.
+2 constant variables are supposed to be set for the length and width for the frame.
 
 ### Solution:
-Make Hungry Fish the subclass of Fish
+Set 2 constants in Fish.java,
+WIDTH = 640, LENGTH = 480
 
 ### Explanation
-Make Hungry Fish the subclass of Fish.
-For the instance, set appearance = "><MEHUNGRY>" for Hungry Fish, other same as Fish
-put methods <setLocation>, <blowBubble>,<turnAround>,<drawString>, <draw>, <move> in Fish,
-as a subclass, HungryFish can inheritance these methods to use
-For method original <reverseAppearance> in Hungry Fish, used Fish.reverseAppearance to instead the common part
-    , then add the different part in <reverseAppearane> in Hungry Fish
+By using constant variables, codes are more flexible.If the size of the code need to be
+changed, the developer only need to change the value of the constant.
+It's also easier and more organize for the code.
 
 
 ============================================================
