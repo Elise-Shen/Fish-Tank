@@ -53,15 +53,16 @@ public class Fish {
 
 
 
-    /**
+    /**PROBLEM 3: FISH OVERLAP BY BUBBLE
      * Causes this fish to blow a bubble.
      */
     protected void blowBubble() {
         Bubble b = new Bubble();
         b.setLocation(c, r);
         System.out.println(r + " " + c);
-
-        FishTank.myLittleFishies[r][c] = b;
+        if (FishTank.myLittleFishies[r][c] == null) {
+            FishTank.myLittleFishies[r][c] = b;
+        }
     }
 
 
@@ -136,7 +137,7 @@ public class Fish {
 
 
 
-    /**
+    /** PROBLEM 2:FISH OUT OF RANGE
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void move() {
@@ -147,7 +148,7 @@ public class Fish {
 
         // Figure out whether I turn around.
 
-        if (r >= (height / 10)-1 | r <= 0 | c >= (width /6)-1 | c <= 0) {
+        if (c >= (width /6)-3 | c <= 0) {
 
 
             turnAround();
@@ -158,14 +159,14 @@ public class Fish {
         if (d < 0.1 && r<=(height/10)-2) {
 
             r += 1;//goes down
-        } else if (d < 0.2 && r>=1) {
+        } else if (d < 0.2 && r>=4) {
             r -= 1;//goes up
         }
 
 
         // Move one spot to the right or left.
         //System.out.println("error?"+c);
-        if (goingRight && c<= (width /6)-2) {
+        if (goingRight && c<= (width /6)-4) {
 
             c += 1;//right
 
@@ -175,3 +176,7 @@ public class Fish {
         }
     }
 }
+
+
+
+
