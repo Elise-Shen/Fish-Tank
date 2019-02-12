@@ -40,8 +40,8 @@ public class FollowingFish extends FishTankEntity {
      * @param b  the second coordinate.
      */
     public void setLocation(int a, int b) {
-      c = a;
-      r = b;
+        c = a;
+        r = b;
     }
 
     int getX() {
@@ -57,19 +57,19 @@ public class FollowingFish extends FishTankEntity {
      * appearances.
      */
     private String reverseAppearance() {
-      System.out.println("Turnign around" + this.appearance);
+        System.out.println("Turnign around" + this.appearance);
         String reverse = "";
         for (int i=appearance.length()-1; i>=0; i--) {
             switch (appearance.charAt(i)) {
-            case ')': reverse += '('; break;
-            case '(': reverse += ')'; break;
-            case '>': reverse += '<'; break;
-            case '<': reverse += '>'; break;
-            case '}': reverse += '{'; break;
-            case '{': reverse += '}'; break;
-            case '[': reverse += ']'; break;
-            case ']': reverse += '['; break;
-            default: reverse += appearance.charAt(i); break;
+                case ')': reverse += '('; break;
+                case '(': reverse += ')'; break;
+                case '>': reverse += '<'; break;
+                case '<': reverse += '>'; break;
+                case '}': reverse += '{'; break;
+                case '{': reverse += '}'; break;
+                case '[': reverse += ']'; break;
+                case ']': reverse += '['; break;
+                default: reverse += appearance.charAt(i); break;
             }
         }
         System.out.println("Turned around" + this.appearance);
@@ -133,9 +133,10 @@ public class FollowingFish extends FishTankEntity {
         // Move one spot to the right or left.
         if (goingRight) {
             c += 1;
-        } else {
+        } else if (!goingRight) {
             c -= 1;
         }
+
 
         if(Math.abs(de.getY() - r) > 2) {
             if(de.getY() < r) {

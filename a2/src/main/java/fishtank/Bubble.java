@@ -28,8 +28,8 @@ public class Bubble extends FishTankEntity {
      */
     public Bubble() {
         // Get a nice-looking grey for the bubble
-         colour = Color.gray.darker().darker().darker();
-         // start off with . as the appearance
+        colour = Color.gray.darker().darker().darker();
+        // start off with . as the appearance
         appearance = ".";
     }
 
@@ -40,9 +40,9 @@ public class Bubble extends FishTankEntity {
      */
     public void setLocation(int a, int b) {
         // set x to a
-      x = a;
+        x = a;
         // set y to b
-      y = b;
+        y = b;
     }
 
     @Override
@@ -94,11 +94,11 @@ public class Bubble extends FishTankEntity {
 
         // Figure out whether to grow, if at all.
         d = Math.random();
-          // Oocasinally change a . to a o or a o to a O
+        // Oocasinally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals("."))appearance="o";
-            // If the appearance is an o, change it to a O
+                // If the appearance is an o, change it to a O
             else if (appearance.equals("o"))appearance="O";
         }
     }    /**
@@ -108,15 +108,15 @@ public class Bubble extends FishTankEntity {
 
         // Move upwards.
         y--;
-         x -= 1; //left
+        x -= 1; //left
 
         // Figure out whether to grow, if at all.
-          d = Math.random();
-          // Oocasinally change a . to a o or a o to a O
+        d = Math.random();
+        // Oocasinally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals(".")) appearance = "o";
-            // If the appearance is an o, change it to a O
+                // If the appearance is an o, change it to a O
             else if (appearance.equals("o")) appearance = "O";
         }
     }
@@ -127,26 +127,32 @@ public class Bubble extends FishTankEntity {
 
         // Move upwards.
         y--;
-x += 1;// right
+        x += 1;// right
         // Figure out whether to grow, if at all.
         d = Math.random();
-          // Oocasinally change a . to a o or a o to a O
+        // Oocasinally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals("."))appearance="o";
-            // If the appearance is an o, change it to a O
+                // If the appearance is an o, change it to a O
             else if (appearance.equals("o"))appearance="O";
         }
     }
 
     public void update() {
         d = Math.random();
-        if (d < 0.33) {
+        if (d < 0.33 && y>0) {
             floatStraightUp();
-        } else if (d < 0.66) {
+        } else if (d < 0.66 && y>0 && x<103) {
             floatRightUp();
-        } else /* heybub.d >= 0.66 */ {
+        } else if(d<1 && y>0 && x>1) {
             floatLeftUp();
+        }
+        if (y<=0){
+            this.delete();
+        }
+        else if(x>=103 && x<=1){
+            this.delete();
         }
     }
 }

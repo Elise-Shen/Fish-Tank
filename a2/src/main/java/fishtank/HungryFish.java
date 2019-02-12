@@ -36,16 +36,16 @@ public class HungryFish extends FishTankEntity {
      * @param b  the second coordinate.
      */
     public void setLocation(int a, int b) {
-      r = a;
-      c = b;
+        c = a;
+        r = b;
     }
 
     int getX() {
-        return r;
+        return c;
     }
 
     int getY() {
-        return c;
+        return r;
     }
 
 
@@ -53,11 +53,11 @@ public class HungryFish extends FishTankEntity {
      * Causes this fish to blow a bubble.
      */
     protected void blowBubble() {
-          Bubble b = new Bubble();
-          b.setLocation(c, r);
-          System.out.println(r + " " + c);
+        Bubble b = new Bubble();
+        b.setLocation(c, r);
+        System.out.println(r + " " + c);
 
-            FishTank.addEntity(c, r, b);
+        FishTank.addEntity(c, r, b);
     }
 
 
@@ -67,19 +67,19 @@ public class HungryFish extends FishTankEntity {
      * appearances.
      */
     private String reverseAppearance() {
-      System.out.println("Turnign around" + this.appearance);
+        System.out.println("Turnign around" + this.appearance);
         String reverse = "";
         for (int i=appearance.length()-1; i>=0; i--) {
             switch (appearance.charAt(i)) {
-            case ')': reverse += '('; break;
-            case '(': reverse += ')'; break;
-            case '>': reverse += '<'; break;
-            case '<': reverse += '>'; break;
-            case '}': reverse += '{'; break;
-            case '{': reverse += '}'; break;
-            case '[': reverse += ']'; break;
-            case ']': reverse += '['; break;
-            default: reverse += appearance.charAt(i); break;
+                case ')': reverse += '('; break;
+                case '(': reverse += ')'; break;
+                case '>': reverse += '<'; break;
+                case '<': reverse += '>'; break;
+                case '}': reverse += '{'; break;
+                case '{': reverse += '}'; break;
+                case '[': reverse += ']'; break;
+                case ']': reverse += '['; break;
+                default: reverse += appearance.charAt(i); break;
             }
         }
         System.out.println("Turned around" + this.appearance);
@@ -141,33 +141,36 @@ public class HungryFish extends FishTankEntity {
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void update() {
-
-        // Move one spot to the right or left.
-        if (goingRight) {
-            c += 1;
-        } else {
-            c -= 1;
-        }
-
-        // Figure out whether I blow a bubble.
         double d = Math.random();
-        // If it's elss tahn 10%, blow a bubble.
-        if (d < 0.1) { blowBubble(); }
 
         // Figure out whether I turn around.
         d = Math.random();
-        // If it's elss tahn 10%, turn around
         if (d < 0.1) { turnAround(); }
+
+        // Move one spot to the right or left.
+        if (goingRight&&c<103) {
+            c += 1;
+        } else if (!goingRight&&c>2) {
+            c -= 1;
+        }
+        if (goingRight && c==103) {
+            turnAround();
+        } else if (!goingRight && c==2 ) {
+            turnAround();
+        }
+
+
 
         // Figure out whether to move up or down, or neither.
         d = Math.random();
-        // If it's elss tahn 10%, move up or down.
-        if (d < 0.1) {
-            // Increment
+        if (d < 0.1 && r<47) {
             r += 1;
-        } else if (d < 0.2) {
-            // Decrement
+        } else if (d < 0.2 && r>=4) {
             r -= 1;
         }
+
+        // Figure out whether I blow a bubble.
+
+        if (d < 0.1) { blowBubble(); }
     }
 }

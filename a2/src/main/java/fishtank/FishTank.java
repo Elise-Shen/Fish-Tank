@@ -42,13 +42,13 @@ public class FishTank {
      * (int)(640/6) columns, (int)(480/10) rows.
      */
     private static FishTankEntity[][] entities =
-        new FishTankEntity[width][height];
+            new FishTankEntity[width][height];
 
     private static boolean running = true;
 
     public static void addEntity(int x, int y, FishTankEntity e) {
         entities[x][y] = e;
-        e.setLocation(y, x);
+        e.setLocation(x, y);
     }
 
     public static FishTankEntity getEntity(int x, int y) {
@@ -73,7 +73,7 @@ public class FishTank {
         addEntity(16, 35, new Fish());
         addEntity(6, 22, new Fish());
         addEntity(10, 20, new HungryFish());
-        addEntity(10, 20, new FollowingFish((Fish)getEntity(23, 18)));
+        //addEntity(10, 20, new FollowingFish((Fish)getEntity(23, 18)));
         addEntity(24, 33, new Seaweed(6));
         addEntity(32, 25, new Seaweed(7));
         addEntity(13, 25, new Seaweed(5));

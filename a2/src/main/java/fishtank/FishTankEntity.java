@@ -18,6 +18,7 @@ public abstract class FishTankEntity {
 
     void delete() {
         exists = false;
+
     }
 
     boolean exists() {

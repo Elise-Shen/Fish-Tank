@@ -37,16 +37,16 @@ public class Fish extends FishTankEntity {
      * @param b  the second coordinate.
      */
     public void setLocation(int a, int b) {
-      r = a;
-      c = b;
+        c = a;
+        r = b;
     }
 
     int getX() {
-        return r;
+        return c;
     }
 
     int getY() {
-        return c;
+        return r;
     }
 
 
@@ -54,11 +54,19 @@ public class Fish extends FishTankEntity {
      * Causes this fish to blow a bubble.
      */
     protected void blowBubble() {
-		  Bubble b = new Bubble();
-		  b.setLocation(c, r);
-		  System.out.println(r + " " + c);
+        Bubble b = new Bubble();
+        if (c-1<0){
+            b.setLocation(c+1, r);
+            FishTank.addEntity(c+1, r, b);
+        }
+        else if (c-1>=0){
+            b.setLocation(c-1, r);
+            FishTank.addEntity(c-1, r, b);
+        }
 
-		  FishTank.addEntity(c, r, b);
+        System.out.println("in fish"+r + " " + c);
+
+
     }
 
 
@@ -71,15 +79,15 @@ public class Fish extends FishTankEntity {
         String reverse = "";
         for (int i=appearance.length()-1; i>=0; i--) {
             switch (appearance.charAt(i)) {
-            case ')': reverse += '('; break;
-            case '(': reverse += ')'; break;
-            case '>': reverse += '<'; break;
-            case '<': reverse += '>'; break;
-            case '}': reverse += '{'; break;
-            case '{': reverse += '}'; break;
-            case '[': reverse += ']'; break;
-            case ']': reverse += '['; break;
-            default: reverse += appearance.charAt(i); break;
+                case ')': reverse += '('; break;
+                case '(': reverse += ')'; break;
+                case '>': reverse += '<'; break;
+                case '<': reverse += '>'; break;
+                case '}': reverse += '{'; break;
+                case '{': reverse += '}'; break;
+                case '[': reverse += ']'; break;
+                case ']': reverse += '['; break;
+                default: reverse += appearance.charAt(i); break;
             }
         }
 
@@ -142,27 +150,38 @@ public class Fish extends FishTankEntity {
      */
     public void update() {
 
+        double d = Math.random();
+
+
+
         // Move one spot to the right or left.
-        if (goingRight) {
+        if (goingRight&&c<103) {
             c += 1;
-        } else {
+        } else if (!goingRight&&c>2) {
             c -= 1;
         }
-
-        // Figure out whether I blow a bubble.
-        double d = Math.random();
-        if (d < 0.1) { blowBubble(); }
 
         // Figure out whether I turn around.
         d = Math.random();
         if (d < 0.1) { turnAround(); }
+        if (goingRight && c==103) {
+            turnAround();
+        } else if (!goingRight && c==2) {
+            turnAround();
+        }
+
+
 
         // Figure out whether to move up or down, or neither.
-		d = Math.random();
-        if (d < 0.1) {
+        d = Math.random();
+        if (d < 0.1 && r<47) {
             r += 1;
-        } else if (d < 0.2) {
+        } else if (d < 0.2 && r>=1) {
             r -= 1;
         }
+
+        // Figure out whether I blow a bubble.
+
+        if (d < 0.1) { blowBubble(); }
     }
 }
