@@ -55,16 +55,25 @@ public class Fish extends FishTankEntity {
      */
     protected void blowBubble() {
         Bubble b = new Bubble();
-        if (c-1<0){
-            b.setLocation(c+1, r);
-            FishTank.addEntity(c+1, r, b);
+        // check blow up or down,at bottom blow up,else down
+        int a;
+        if (r==47){
+            a = r-1;
+            while(FishTank.getEntity(c,a)!=null&&a>1){
+                a=a-1;
+            }
         }
-        else if (c-1>=0){
-            b.setLocation(c-1, r);
-            FishTank.addEntity(c-1, r, b);
+        else{
+            a=r+1;
+            while(FishTank.getEntity(c,a)!=null && a<47){
+                a=a+1;
+            }
         }
+        b.setLocation(c, a);
+        FishTank.addEntity(c, a, b);
 
-        System.out.println("in fish"+r + " " + c);
+        System.out.println("fish"+c + " " + r);
+        System.out.println("bubble"+c + " " + a);
 
 
     }
@@ -154,34 +163,36 @@ public class Fish extends FishTankEntity {
 
 
 
-        // Move one spot to the right or left.
+        //1. Move one spot to the right or left.
         if (goingRight&&c<103) {
             c += 1;
         } else if (!goingRight&&c>2) {
             c -= 1;
         }
 
-        // Figure out whether I turn around.
+        // 2.random turn around
         d = Math.random();
         if (d < 0.1) { turnAround(); }
+
+        //3.Figure out whether I turn around.
         if (goingRight && c==103) {
             turnAround();
         } else if (!goingRight && c==2) {
             turnAround();
         }
+        // 4. Figure out whether I blow a bubble.
+
+        if (d < 0.1) { blowBubble(); }
 
 
-
-        // Figure out whether to move up or down, or neither.
+        // 5. Figure out whether to move up or down, or neither.
         d = Math.random();
         if (d < 0.1 && r<47) {
             r += 1;
-        } else if (d < 0.2 && r>=1) {
+        } else if (d < 0.2 && r>1) {
             r -= 1;
         }
 
-        // Figure out whether I blow a bubble.
 
-        if (d < 0.1) { blowBubble(); }
     }
 }
