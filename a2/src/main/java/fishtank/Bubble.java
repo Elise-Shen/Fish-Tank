@@ -83,6 +83,7 @@ public class Bubble extends FishTankEntity {
 
 
 
+
     /**
      * Causes this item to take its turn in the fish-tank simulation, moving straight up.
      */
@@ -141,17 +142,21 @@ public class Bubble extends FishTankEntity {
 
     public void update() {
         d = Math.random();
-        if (d < 0.33 && y>0) {
+        //add test collision
+        if (d < 0.33 && y>=2 && this.no_collision(x,y-1)) {
             floatStraightUp();
-        } else if (d < 0.66 && y>0 && x<103) {
+        } else if (0.33<d && d < 0.66 && y>=2 && x<=104 && this.no_collision(x+1,y-1)) {
             floatRightUp();
-        } else if(d<1 && y>0 && x>1) {
+        } else if(d<1 && y>=2 && x>=2 && this.no_collision(x-1,y-1)) {
             floatLeftUp();
         }
-        if (y<=0){
+        //System.out.println("in bubble, aftermove"+x+" "+y);
+        //如果设有y<=1，那么nocollision(x,1-1)会与frame相撞,就永远不会上移动,-can't deleted
+        if (y<=3){
             this.delete();
+            System.out.println("deleted");
         }
-        else if(x>=103 && x<=1){
+        else if(x>=105 && x<=1){
             this.delete();
         }
     }

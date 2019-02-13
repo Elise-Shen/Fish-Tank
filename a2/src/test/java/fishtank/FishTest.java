@@ -16,17 +16,19 @@ public class FishTest {
        to follow this naming convention!
      */
     private Fish fish;
+    private Bubble bubble;
 
     @Before
     public void setUp() {
         fish = new Fish();
+        bubble = new Bubble();
     }
 
     @Test
     public void testFishBubbles() {
         //Note: This test currently fails, but should pass once you've
       // refactored &
-        //fixed the starter code.
+        //fixed the starter code
         boolean bubbleMade = false;
         for (int i = 0; i < 200; i++) {
             fish.setLocation(5, 10);
@@ -34,7 +36,7 @@ public class FishTest {
                 false; //notice: I can edit package private attributes!
             fish.update();
             //fish should move one tile left and eventually blow a bubble.
-            FishTankEntity e = FishTank.getEntity(9, 5);
+            FishTankEntity e = FishTank.getEntity(4, 9);
             if (e instanceof Bubble) {
                 bubbleMade = true;
                 break;
@@ -51,20 +53,24 @@ public class FishTest {
         // refactored &
         //fixed the starter code.
         int count = 0;
-        for (int i = 0; i < 200; i++) {
-            fish.setLocation(5, 10);
+        for (int i = 0; i < 1000; i++) {
+            fish.setLocation(5, 2);
             fish.goingRight =
-                    false; //notice: I can edit package private attributes!
+                    false; //c--
             fish.update();
             //fish should move one tile left and eventually blow a bubble.
-            FishTankEntity e = FishTank.getEntity(9, 5);
+            FishTankEntity e = FishTank.getEntity(4, 1);
+
             if (e instanceof Bubble) {
                 count ++;
+
             }
         }
-        boolean runTenPercentOfTime = count<=10 && count>=30;
+        System.out.println(count);
+        boolean runTenPercentOfTime = count>100 && count<150;
         assertTrue("Not blow a bubble at their location (after moving) about 10% of the time",runTenPercentOfTime);
     }
+
     @Test
     public void testGoingRight(){
         //true - true
@@ -73,16 +79,47 @@ public class FishTest {
     }
 
     @Test
-    public void testMoveUp(){
-        int count=0;
-        for(int i=0; i<200;i++){
-            fish.setLocation(5,10);
-            fish.update();
+    public void testFishBubblesTenPercent() {
 
-
-
+        int count = 0;
+        for (int j  = 10; j < 20; j++) {
+            for (int i = 0; i < 100; i++) {
+                fish.setLocation(j, 5);
+                fish.goingRight =
+                        false;
+                fish.update();
+            }
+            for (int z = 0; z < 100;z++) {
+                FishTankEntity e = FishTank.getEntity(z, j);
+                if (e instanceof Bubble) {
+                    count ++;
+                }
+            }
         }
+        boolean runTenPercentOfTime = (count>=50 && count<=150);
+        assertTrue(runTenPercentOfTime);
+    }
+
+    @Test
+    public void test_bubble_collision(){
+        boolean check=false;
+        // create 3 object
+        FishTank.addEntity(10,10,new Seaweed(1));
+        FishTank.addEntity(11,10,new Seaweed(1));
+        FishTank.addEntity(12,10,new Seaweed(1));
+        FishTank.addEntity(11,11,bubble);
+        bubble.update();
+
+        if (bubble.getX()==11&&bubble.getY()==11){
+            check = true;
+        }
+        assertTrue("bubble not move", check);
+
+
+
 
     }
-}
+
+    }
+
 

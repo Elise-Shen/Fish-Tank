@@ -18,13 +18,21 @@ public class Seaweed extends FishTankEntity {
   /** My colour. Ah,the vagaries of British vs. US spelling. */
   Color colour;
 
+  /** This bubble's first coordinate. */
+  private int my_curr_row;
+  /** This bubble's second coordinate. */
+  private int my_curr_col;
+
+  int l_original = l;
+  public static int count_up = 0;
+
 
   /**
    * Constructs a new seaweed item at the specified cursor
    * location (x,y),l segments tall.
    *
-   * @param  x  the x coordinate of the bubble's cursor location.
-   * @param  y  the y coordinate of the bubble's cursor location.
+   * @param  my_curr_col  the x coordinate of the bubble's cursor location.
+   * @param  my_curr_row  the y coordinate of the bubble's cursor location.
    * @param  l  the number of segments this seaweed is tall.
    */
   public Seaweed(int l) {
@@ -44,39 +52,36 @@ public class Seaweed extends FishTankEntity {
    *
    * @param  g  the graphics context in which to draw this item.
    */
-  void draw(Graphics g) {
+  public void draw(Graphics g) {
 
     // WWhich way does the first segment lean?
-
-
-      // WWhich way does the first segment lean?
-      boolean lR = leanRight;
-      // error 1
-      for (int i = 0; i < l; i++) {// Draw a "/" seaweed segment: even numbered and leaning to the right.
-        if (i % 2 == 0)
-          if (lR){
-            //System.out.println("x1");
-            // Draw the string
-            drawString(g, "/", my_curr_row, (-i + my_curr_col));}
-        if (i % 2 == 1) { // to make a point about comparing to true or false.
-          if (!lR){
-            //System.out.println("x4");
-            // Draw the string for the last kind of leaning of the segment at lcoation  my_curr_row,(-i+my_curr_col)
-            drawString(g, "/", my_curr_row, (-i + my_curr_col));}
-        }
-        if (i % 2 == 1) // Draw a "/" seaweed segment: odd numbered and leaning to the right.
-          if (lR){
-            //System.out.println("x2");
-            // Draw the string
-            drawString(g, "\\", my_curr_row, (-i + my_curr_col));}
-        if (i % 2 == 0) // Draw a "/" seaweed segment: even numbered and leaning to the left.
-          if (!lR){
-            //System.out.println("x3");
-            // Draw the string
-            drawString(g, "\\", my_curr_row, (-i + my_curr_col));}
-
+    boolean lR = leanRight;
+    // error 1
+    for (int i = 0; i < l; i++) {// Draw a "/" seaweed segment: even numbered and leaning to the right.
+      if (i % 2 == 0)
+        if (lR){
+          //System.out.println("x1");
+          // Draw the string
+          drawString(g, "/", my_curr_row, (-i + my_curr_col));}
+      if (i % 2 == 1) { // to make a point about comparing to true or false.
+        if (!lR){
+          //System.out.println("x4");
+          // Draw the string for the last kind of leaning of the segment at lcoation  my_curr_row,(-i+my_curr_col)
+          drawString(g, "/", my_curr_row, (-i + my_curr_col));}
       }
+      if (i % 2 == 1) // Draw a "/" seaweed segment: odd numbered and leaning to the right.
+        if (lR){
+          //System.out.println("x2");
+          // Draw the string
+          drawString(g, "\\", my_curr_row, (-i + my_curr_col));}
+      if (i % 2 == 0) // Draw a "/" seaweed segment: even numbered and leaning to the left.
+        if (!lR){
+          //System.out.println("x3");
+          // Draw the string
+          drawString(g, "\\", my_curr_row, (-i + my_curr_col));}
+
     }
+  }
 
   /**
    * Draws the given string in the given graphics context at
@@ -102,25 +107,48 @@ public class Seaweed extends FishTankEntity {
    * @param b  the second coordinate.
    */
   public void setLocation(int a,int b) {
-    this.my_curr_row  =a;
-    this.my_curr_col  =b;
+    this.my_curr_col  =a;
+    this.my_curr_row  =b;
   }
 
   @Override
   int getX() {
-    return my_curr_row;
+    return my_curr_col;
   }
 
   @Override
   int getY() {
-    return my_curr_col;
+    return my_curr_row;
+  }
+
+  public void reduce_length(){
+    for (int i=1;i<=l;i++){
+
+      FishTankEntity e = FishTank.getEntity(my_curr_col,my_curr_row-i);
+      if (e==null){
+        System.out.println("---");}
+      if (e instanceof Fish || e instanceof HungryFish){
+        System.out.println("!!crash seaweed");
+        l = i;
+        break;
+
+      }
+    }
   }
 
   /**
    * Causes this item to take its turn in the fish-tank simulation.
    */
   public void update() {
+    count_up++;
+    reduce_length();
+
     leanRight  =!leanRight;
+
+    //go back to original length
+    if (count_up==200){
+      l=l_original;
+    }
   }
 
 
@@ -128,10 +156,7 @@ public class Seaweed extends FishTankEntity {
 
 
 
-  /** This bubble's first coordinate. */
-  private int my_curr_row;
-  /** This bubble's second coordinate. */
-  private int my_curr_col;
+
 
 
 }

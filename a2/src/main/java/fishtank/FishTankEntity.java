@@ -27,4 +27,16 @@ public abstract class FishTankEntity {
 
     abstract int getX();
     abstract int getY();
+
+    public boolean no_collision(int x,int y){
+        // return True if there's no collision
+        boolean check = false;
+        //在画布内且null --- true---excecute
+        if (x>=2 && x<=104 && y<=48 && y>=2){
+            if (FishTank.getEntity(x,y)==null){
+                check = true;
+            }
+        }
+        return check;
+    }
 }

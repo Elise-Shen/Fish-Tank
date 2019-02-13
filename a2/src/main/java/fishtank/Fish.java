@@ -55,18 +55,19 @@ public class Fish extends FishTankEntity {
      */
     protected void blowBubble() {
         Bubble b = new Bubble();
-        // check blow up or down,at bottom blow up,else down
+        //顶部：一般向左，顶部且向左，向右
+        //其他：向上
         int a;
-        if (r==47){
-            a = r-1;
-            while(FishTank.getEntity(c,a)!=null&&a>1){
-                a=a-1;
+        if (r==0){
+            a = r+1;
+            while(FishTank.getEntity(c,a)!=null&&a<47){
+                a=a+1;
             }
         }
         else{
-            a=r+1;
-            while(FishTank.getEntity(c,a)!=null && a<47){
-                a=a+1;
+            a=r-1;
+            while(FishTank.getEntity(c,a)!=null && a>1){
+                a=a-1;
             }
         }
         b.setLocation(c, a);
@@ -159,23 +160,27 @@ public class Fish extends FishTankEntity {
      */
     public void update() {
 
-        double d = Math.random();
+        double d ;
 
 
 
         //1. Move one spot to the right or left.
-        if (goingRight&&c<103) {
-            c += 1;
-        } else if (!goingRight&&c>2) {
-            c -= 1;
-        }
+        if (goingRight && c<=103) {
+            if(this.no_collision(c+1,r)){
+                c+=1;}
+            else{turnAround();}}
+
+        else if (!goingRight && c>=3) {
+            if(this.no_collision(c-1,r)){
+                c-=1;}
+            else{turnAround();}}
 
         // 2.random turn around
         d = Math.random();
         if (d < 0.1) { turnAround(); }
 
         //3.Figure out whether I turn around.
-        if (goingRight && c==103) {
+        if (goingRight && c==104) {
             turnAround();
         } else if (!goingRight && c==2) {
             turnAround();
@@ -185,14 +190,16 @@ public class Fish extends FishTankEntity {
         if (d < 0.1) { blowBubble(); }
 
 
-        // 5. Figure out whether to move up or down, or neither.
+        // 5. Figure out whether to move up or down, or neither.上下有东西就不动
         d = Math.random();
-        if (d < 0.1 && r<47) {
-            r += 1;
-        } else if (d < 0.2 && r>1) {
-            r -= 1;
+        if (d < 0.1 && r<=47 && this.no_collision(c,r+1)) {
+                r += 1;}
+        else if (d < 0.2 && r>=3&&this.no_collision(c,r-1)) {
+            r -= 1;}
+
+
         }
 
 
     }
-}
+

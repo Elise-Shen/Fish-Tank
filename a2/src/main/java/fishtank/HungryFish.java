@@ -141,36 +141,44 @@ public class HungryFish extends FishTankEntity {
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void update() {
-        double d = Math.random();
 
-        // Figure out whether I turn around.
+        double d ;
+
+
+
+        //1. Move one spot to the right or left.
+        if (goingRight && c<=103) {
+            if(this.no_collision(c+1,r)){
+                c+=1;}
+            else{turnAround();}}
+
+        else if (!goingRight && c>=3) {
+            if(this.no_collision(c-1,r)){
+                c-=1;}
+            else{turnAround();}}
+
+        // 2.random turn around
         d = Math.random();
         if (d < 0.1) { turnAround(); }
 
-        // Move one spot to the right or left.
-        if (goingRight&&c<103) {
-            c += 1;
-        } else if (!goingRight&&c>2) {
-            c -= 1;
-        }
-        if (goingRight && c==103) {
+        //3.Figure out whether I turn around.
+        if (goingRight && c==104) {
             turnAround();
-        } else if (!goingRight && c==2 ) {
+        } else if (!goingRight && c==2) {
             turnAround();
         }
-
-
-
-        // Figure out whether to move up or down, or neither.
-        d = Math.random();
-        if (d < 0.1 && r<47) {
-            r += 1;
-        } else if (d < 0.2 && r>=4) {
-            r -= 1;
-        }
-
-        // Figure out whether I blow a bubble.
+        // 4. Figure out whether I blow a bubble.
 
         if (d < 0.1) { blowBubble(); }
+
+
+        // 5. Figure out whether to move up or down, or neither.上下有东西就不动
+        d = Math.random();
+        if (d < 0.1 && r<=47 && this.no_collision(c,r+1)) {
+            r += 1;}
+        else if (d < 0.2 && r>=3&&this.no_collision(c,r-1)) {
+            r -= 1;}
+
+
     }
 }
