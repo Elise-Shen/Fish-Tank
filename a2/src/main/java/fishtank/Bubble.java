@@ -89,6 +89,7 @@ public class Bubble extends FishTankEntity {
      */
     public void floatStraightUp() {
 
+
         // Move upwards.
         y--;
         x = x; // no change left or right
@@ -143,20 +144,24 @@ public class Bubble extends FishTankEntity {
     public void update() {
         d = Math.random();
         //add test collision
+        int c=0;
         if (d < 0.33 && y>=2 && this.no_collision(x,y-1)) {
             floatStraightUp();
-        } else if (0.33<d && d < 0.66 && y>=2 && x<=104 && this.no_collision(x+1,y-1)) {
+        } else if (0.33<=d && d < 0.66 && y>=2 && x<=104 && this.no_collision(x+1,y-1)) {
             floatRightUp();
-        } else if(d<1 && y>=2 && x>=2 && this.no_collision(x-1,y-1)) {
+        } else if(0.66<=d&&d<1 && y>=2 && x>=2 && this.no_collision(x-1,y-1)) {
             floatLeftUp();
         }
+
         //System.out.println("in bubble, aftermove"+x+" "+y);
         //如果设有y<=1，那么nocollision(x,1-1)会与frame相撞,就永远不会上移动,-can't deleted
+        //System.out.println("num"+x+" "+y);
         if (y<=3){
             this.delete();
-            System.out.println("deleted");
+            //
         }
-        else if(x>=105 && x<=1){
+        else if(x>=105 || x<=1){
+            //System.out.println("deleted");
             this.delete();
         }
     }

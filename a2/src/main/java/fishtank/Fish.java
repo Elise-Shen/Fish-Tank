@@ -55,7 +55,7 @@ public class Fish extends FishTankEntity {
      */
     protected void blowBubble() {
         Bubble b = new Bubble();
-        //顶部：一般向左，顶部且向左，向右
+        //顶部：一般向下
         //其他：向上
         int a;
         if (r==0){
@@ -153,6 +153,24 @@ public class Fish extends FishTankEntity {
         drawString(g, appearance, r, c);
     }
 
+    //看是否在海草的范围内
+    public void find_seaweed(){
+        System.out.println(seaweed_c);
+        for(int i = 1;i<=46-r;i++) {
+            FishTankEntity e = FishTank.getEntity(c, r+i);
+            if (e instanceof Seaweed){
+                change_seaweed((Seaweed)e);
+            }
+        }
+    }
+    public void change_seaweed(Seaweed e){
+        if ((e.getY()-r)<=e.l && (e.getY()-r)>=2){
+            System.out.println(c+"！！！！！！！！！changed");
+            e.l=e.getY()-r;
+
+        }
+    }
+
 
 
     /**
@@ -161,8 +179,6 @@ public class Fish extends FishTankEntity {
     public void update() {
 
         double d ;
-
-
 
         //1. Move one spot to the right or left.
         if (goingRight && c<=103) {
@@ -197,6 +213,11 @@ public class Fish extends FishTankEntity {
         else if (d < 0.2 && r>=3&&this.no_collision(c,r-1)) {
             r -= 1;}
 
+        //到这里接下来要去的（)
+        //column中有海草根
+        if (seaweed_c.contains(c)){
+            find_seaweed();
+        }
 
         }
 

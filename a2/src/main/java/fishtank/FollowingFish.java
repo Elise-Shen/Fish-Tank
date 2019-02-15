@@ -21,7 +21,9 @@ public class FollowingFish extends FishTankEntity {
 
     /** The entity that our fish is following */
     Fish de;
-
+    //  follwoing要追de，追上之后保持
+    //追：首先测距离，c-de.c>2 ->得追(老婆)
+    // 遇到障碍绕过，方向不变
 
     /**
      * Constructs a new hungry fish.
@@ -81,15 +83,7 @@ public class FollowingFish extends FishTankEntity {
     /**
      * Turns this fish to fc
      */
-    protected void turnToFace() {
-        if(de.getX() < this.getX() && goingRight) {
-            goingRight = false;
-            reverseAppearance();
-        } else if(de.getX() > this.getX() && !goingRight) {
-            goingRight = true;
-            reverseAppearance();
-        }
-    }
+
 
     /** The font used to draw instances of this class. */
     static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
@@ -123,21 +117,31 @@ public class FollowingFish extends FishTankEntity {
     }
 
 
-
+    protected void turnToFace() {
+        //followee在左边,following fish 在往右边走--following fish 掉头
+        if(de.getX() < this.getX() && goingRight) {
+            goingRight = false;
+            reverseAppearance();
+        } else if(de.getX() > this.getX() && !goingRight) {
+            goingRight = true;
+            reverseAppearance();
+        }
+    }
     /**
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void update() {
+        //决定方向
         turnToFace();
 
         // Move one spot to the right or left.
-        if (goingRight) {
+        if (goingRight && c<=103) {
             c += 1;
         } else if (!goingRight) {
             c -= 1;
         }
 
-
+        //和ee的差距大于2
         if(Math.abs(de.getY() - r) > 2) {
             if(de.getY() < r) {
                 r -= 1;

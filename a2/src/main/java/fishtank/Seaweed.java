@@ -23,8 +23,9 @@ public class Seaweed extends FishTankEntity {
   /** This bubble's second coordinate. */
   private int my_curr_col;
 
-  int l_original = l;
-  public static int count_up = 0;
+  int l_original;
+  //int l_original=15;
+  public int count_up = 0;
 
 
   /**
@@ -37,6 +38,7 @@ public class Seaweed extends FishTankEntity {
    */
   public Seaweed(int l) {
     this.l  =l;
+    this.l_original = this.l;
     colour  =Color.green.darker().darker();
   }
 
@@ -109,6 +111,7 @@ public class Seaweed extends FishTankEntity {
   public void setLocation(int a,int b) {
     this.my_curr_col  =a;
     this.my_curr_row  =b;
+    seaweed_c.add(a);
   }
 
   @Override
@@ -121,33 +124,38 @@ public class Seaweed extends FishTankEntity {
     return my_curr_row;
   }
 
-  public void reduce_length(){
-    for (int i=1;i<=l;i++){
-
-      FishTankEntity e = FishTank.getEntity(my_curr_col,my_curr_row-i);
-      if (e==null){
-        System.out.println("---");}
-      if (e instanceof Fish || e instanceof HungryFish){
-        System.out.println("!!crash seaweed");
-        l = i;
-        break;
-
-      }
-    }
-  }
+//  public void reduce_length(){
+//    for (int i=1;i<=l;i++){
+//
+//      FishTankEntity e = FishTank.getEntity(my_curr_col,my_curr_row-i);
+//      if (e==null){
+//        System.out.println("---");}
+//      if (e instanceof Fish || e instanceof HungryFish){
+//        System.out.println("!!crash seaweed");
+//        l = i;
+//        break;
+//
+//      }
+//    }
+//  }
 
   /**
    * Causes this item to take its turn in the fish-tank simulation.
    */
   public void update() {
+
     count_up++;
-    reduce_length();
+    //reduce_length();
+    System.out.println("------------------"+count_up);
 
     leanRight  =!leanRight;
 
     //go back to original length
-    if (count_up==200){
+    if (count_up==20){
+      System.out.println("oooooooo"+l+"sssss "+l_original);
       l=l_original;
+      System.out.println("lllllllll"+l);
+      count_up=0;//恢复，等下一次变化
     }
   }
 

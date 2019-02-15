@@ -15,13 +15,13 @@ public class FishTest {
        properly capitalized -- we will be autograding your tests, so make sure
        to follow this naming convention!
      */
+    //blow bubble, turn around, 10 percent
     private Fish fish;
-    private Bubble bubble;
+
 
     @Before
     public void setUp() {
         fish = new Fish();
-        bubble = new Bubble();
     }
 
     @Test
@@ -82,15 +82,15 @@ public class FishTest {
     public void testFishBubblesTenPercent() {
 
         int count = 0;
-        for (int j  = 10; j < 20; j++) {
-            for (int i = 0; i < 100; i++) {
-                fish.setLocation(j, 5);
+        for (int j  = 10; j < 35; j++) {
+            for (int i = 0; i < 40; i++) {
+                fish.setLocation(j,0);
                 fish.goingRight =
                         false;
                 fish.update();
             }
-            for (int z = 0; z < 100;z++) {
-                FishTankEntity e = FishTank.getEntity(z, j);
+            for (int z = 0; z < 40;z++) {
+                FishTankEntity e = FishTank.getEntity(j,z);
                 if (e instanceof Bubble) {
                     count ++;
                 }
@@ -100,26 +100,13 @@ public class FishTest {
         assertTrue(runTenPercentOfTime);
     }
 
-    @Test
-    public void test_bubble_collision(){
-        boolean check=false;
-        // create 3 object
-        FishTank.addEntity(10,10,new Seaweed(1));
-        FishTank.addEntity(11,10,new Seaweed(1));
-        FishTank.addEntity(12,10,new Seaweed(1));
-        FishTank.addEntity(11,11,bubble);
-        bubble.update();
 
-        if (bubble.getX()==11&&bubble.getY()==11){
-            check = true;
-        }
-        assertTrue("bubble not move", check);
 
 
 
 
     }
 
-    }
+
 
 

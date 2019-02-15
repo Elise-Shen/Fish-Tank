@@ -1,5 +1,7 @@
 package fishtank;
 
+import java.util.ArrayList;
+
 /**
  * In Java, an "abstract class" is just a class that doesn't implement
  * some of its methods.
@@ -13,8 +15,11 @@ public abstract class FishTankEntity {
 
     private boolean exists = true;
 
+
     abstract void update();
     abstract void setLocation(int x, int y);
+    static ArrayList<Integer> seaweed_c = new ArrayList<Integer>();
+
 
     void delete() {
         exists = false;
@@ -24,6 +29,9 @@ public abstract class FishTankEntity {
     boolean exists() {
         return this.exists;
     }
+    void setExists(boolean exists_test){
+        this.exists=exists_test;
+    }
 
     abstract int getX();
     abstract int getY();
@@ -32,7 +40,7 @@ public abstract class FishTankEntity {
         // return True if there's no collision
         boolean check = false;
         //在画布内且null --- true---excecute
-        if (x>=2 && x<=104 && y<=48 && y>=2){
+        if (x>=2 && x<=104 && y<=46 && y>=2){
             if (FishTank.getEntity(x,y)==null){
                 check = true;
             }
