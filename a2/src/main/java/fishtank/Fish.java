@@ -73,8 +73,8 @@ public class Fish extends FishTankEntity {
         b.setLocation(c, a);
         FishTank.addEntity(c, a, b);
 
-        System.out.println("fish"+c + " " + r);
-        System.out.println("bubble"+c + " " + a);
+       // System.out.println("fish"+c + " " + r);
+        //System.out.println("bubble"+c + " " + a);
 
 
     }
@@ -155,7 +155,7 @@ public class Fish extends FishTankEntity {
 
     //看是否在海草的范围内
     public void find_seaweed(){
-        System.out.println(seaweed_c);
+        //System.out.println(seaweed_c);
         for(int i = 1;i<=46-r;i++) {
             FishTankEntity e = FishTank.getEntity(c, r+i);
             if (e instanceof Seaweed){
@@ -165,7 +165,7 @@ public class Fish extends FishTankEntity {
     }
     public void change_seaweed(Seaweed e){
         if ((e.getY()-r)<=e.l && (e.getY()-r)>=2){
-            System.out.println(c+"！！！！！！！！！changed");
+            //System.out.println(c+"！！！！！！！！！changed");
             e.l=e.getY()-r;
 
         }
@@ -180,22 +180,26 @@ public class Fish extends FishTankEntity {
 
         double d ;
 
-        //1. Move one spot to the right or left.
+        //1. Move one spot to the right or left.// touch something than turn
         if (goingRight && c<=103) {
             if(this.no_collision(c+1,r)){
-                c+=1;}
-            else{turnAround();}}
+                c+=1;
+                change_x=1;}
+            else{
+                turnAround();}}
 
         else if (!goingRight && c>=3) {
             if(this.no_collision(c-1,r)){
-                c-=1;}
-            else{turnAround();}}
+                c-=1;
+                change_x=-1;}
+            else{
+                turnAround();}}
 
         // 2.random turn around
         d = Math.random();
         if (d < 0.1) { turnAround(); }
 
-        //3.Figure out whether I turn around.
+        //3.Figure out whether I turn around.//touch boundry
         if (goingRight && c==104) {
             turnAround();
         } else if (!goingRight && c==2) {
@@ -209,9 +213,12 @@ public class Fish extends FishTankEntity {
         // 5. Figure out whether to move up or down, or neither.上下有东西就不动
         d = Math.random();
         if (d < 0.1 && r<=47 && this.no_collision(c,r+1)) {
-                r += 1;}
+                r += 1;
+                change_y=1;
+        }
         else if (d < 0.2 && r>=3&&this.no_collision(c,r-1)) {
-            r -= 1;}
+            r -= 1;
+            change_y=-1;}
 
         //到这里接下来要去的（)
         //column中有海草根

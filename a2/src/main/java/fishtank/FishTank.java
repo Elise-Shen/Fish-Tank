@@ -74,6 +74,9 @@ public class FishTank {
         addEntity(6, 22, new Fish());
         addEntity(10, 20, new HungryFish());
         //addEntity(10, 20, new FollowingFish((Fish)getEntity(23, 18)));
+        addEntity(5,10,new Fish());
+        addEntity(5, 9, new FollowingFish((Fish)getEntity(5, 10)));
+
         addEntity(24, 33, new Seaweed(6));
         addEntity(32, 25, new Seaweed(7));
         addEntity(13, 25, new Seaweed(5));

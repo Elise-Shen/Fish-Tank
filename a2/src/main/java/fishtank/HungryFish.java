@@ -54,10 +54,28 @@ public class HungryFish extends FishTankEntity {
      */
     protected void blowBubble() {
         Bubble b = new Bubble();
-        b.setLocation(c, r);
-        System.out.println(r + " " + c);
+        //顶部：一般向下
+        //其他：向上
+        int a;
+        if (r==0){
+            a = r+1;
+            while(FishTank.getEntity(c,a)!=null&&a<47){
+                a=a+1;
+            }
+        }
+        else{
+            a=r-1;
+            while(FishTank.getEntity(c,a)!=null && a>1){
+                a=a-1;
+            }
+        }
+        b.setLocation(c, a);
+        FishTank.addEntity(c, a, b);
 
-        FishTank.addEntity(c, r, b);
+        System.out.println("fish"+c + " " + r);
+        System.out.println("bubble"+c + " " + a);
+
+
     }
 
 
@@ -170,12 +188,14 @@ public class HungryFish extends FishTankEntity {
         //1. Move one spot to the right or left.
         if (goingRight && c<=103) {
             if(this.no_collision(c+1,r)){
-                c+=1;}
+                c+=1;
+                change_x=1;}
             else{turnAround();}}
 
         else if (!goingRight && c>=3) {
             if(this.no_collision(c-1,r)){
-                c-=1;}
+                c-=1;
+                change_x=-1;}
             else{turnAround();}}
 
         // 2.random turn around
@@ -196,9 +216,11 @@ public class HungryFish extends FishTankEntity {
         // 5. Figure out whether to move up or down, or neither.上下有东西就不动
         d = Math.random();
         if (d < 0.1 && r<=47 && this.no_collision(c,r+1)) {
-            r += 1;}
+            r += 1;
+            change_y=1;}
         else if (d < 0.2 && r>=3&&this.no_collision(c,r-1)) {
-            r -= 1;}
+            r -= 1;
+            change_y=-1;}
 
         //到这里接下来要去的（)
         //column中有海草根

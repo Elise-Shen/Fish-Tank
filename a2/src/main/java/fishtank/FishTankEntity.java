@@ -19,6 +19,8 @@ public abstract class FishTankEntity {
     abstract void update();
     abstract void setLocation(int x, int y);
     static ArrayList<Integer> seaweed_c = new ArrayList<Integer>();
+    int change_x;
+    int change_y;
 
 
     void delete() {

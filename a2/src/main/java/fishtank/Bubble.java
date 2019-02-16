@@ -161,7 +161,7 @@ public class Bubble extends FishTankEntity {
             //
         }
         else if(x>=105 || x<=1){
-            //System.out.println("deleted");
+            //System.out.println("deleted")
             this.delete();
         }
     }

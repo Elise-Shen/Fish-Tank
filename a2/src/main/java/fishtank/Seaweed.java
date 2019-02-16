@@ -146,15 +146,15 @@ public class Seaweed extends FishTankEntity {
 
     count_up++;
     //reduce_length();
-    System.out.println("------------------"+count_up);
+    //System.out.println("------------------"+count_up);
 
     leanRight  =!leanRight;
 
     //go back to original length
     if (count_up==20){
-      System.out.println("oooooooo"+l+"sssss "+l_original);
+      //System.out.println("oooooooo"+l+"sssss "+l_original);
       l=l_original;
-      System.out.println("lllllllll"+l);
+      //System.out.println("lllllllll"+l);
       count_up=0;//恢复，等下一次变化
     }
   }
