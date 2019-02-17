@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class FishTest {
+public class HungryFishTest {
 
     /* Note: FishTest is in the package fish tank, so it has access to package
        private attributes.
@@ -16,12 +16,12 @@ public class FishTest {
        to follow this naming convention!
      */
     //blow bubble, turn around, 10 percent
-    private Fish fish;
+    private HungryFish fish;
 
 
     @Before
     public void setUp() {
-        fish = new Fish();
+        fish = new HungryFish();
     }
 
     //1 turn around
@@ -66,7 +66,7 @@ public class FishTest {
             fish.goingRight =
                     false; //notice: I can edit package private attributes!
             fish.update();
-            System.out.println(fish.getX() + " " + fish.getY());
+            System.out.println(fish.getX()+" "+fish.getY());
             //fish should move one tile left and eventually blow a bubble.
             FishTankEntity e = FishTank.getEntity(4, 9);
             if (e instanceof Bubble) {

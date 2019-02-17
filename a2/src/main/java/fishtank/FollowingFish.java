@@ -1,4 +1,5 @@
 package fishtank;
+
 import java.awt.*;
 
 /**
@@ -9,7 +10,7 @@ public class FollowingFish extends FishTankEntity {
     /**
      * How this fish appears on the screen.
      */
-    public String appearance;
+    public final String appearance;
 
     /**
      * Indicates whether this fish is moving right.
@@ -27,16 +28,14 @@ public class FollowingFish extends FishTankEntity {
     /**
      * The colour of this fish.
      */
-    private Color colour;
+    final private Color colour;
 
     /**
      * The entity that our fish is following
      */
 
-    Fish de;
-    //  follwoing要追de，追上之后保持
-    //追：首先测距离，c-de.c>2 ->得追
-    // 遇到障碍绕过，方向不变
+    final Fish de;
+
 
     /**
      * Constructs a new hungry fish.
@@ -73,54 +72,49 @@ public class FollowingFish extends FishTankEntity {
      * appearances.
      */
     private String reverseAppearance() {
-        System.out.println("Turnign around" + this.appearance);
-        String reverse = "";
+        System.out.println("Turning around" + this.appearance);
+        StringBuilder reverse = new StringBuilder("");
         for (int i = appearance.length() - 1; i >= 0; i--) {
             switch (appearance.charAt(i)) {
                 case ')':
-                    reverse += '(';
+                    reverse.append('(');
                     break;
                 case '(':
-                    reverse += ')';
+                    reverse.append(')');
                     break;
                 case '>':
-                    reverse += '<';
+                    reverse.append('<');
                     break;
                 case '<':
-                    reverse += '>';
+                    reverse.append('>');
                     break;
                 case '}':
-                    reverse += '{';
+                    reverse.append('{');
                     break;
                 case '{':
-                    reverse += '}';
+                    reverse.append('}');
                     break;
                 case '[':
-                    reverse += ']';
+                    reverse.append(']');
                     break;
                 case ']':
-                    reverse += '[';
+                    reverse.append('[');
                     break;
                 default:
-                    reverse += appearance.charAt(i);
+                    reverse.append(appearance.charAt(i));
                     break;
             }
         }
         System.out.println("Turned around" + this.appearance);
-        appearance = reverse;
-        return reverse;
+        String appearance = reverse.toString();
+        return appearance;
     }
-
-
-    /**
-     * Turns this fish to fc
-     */
 
 
     /**
      * The font used to draw instances of this class.
      */
-    static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    final static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 
     /**
@@ -154,14 +148,14 @@ public class FollowingFish extends FishTankEntity {
         int gy = de.getY();
         boolean available = false;
         // above or below can't <=2 -->斜着走
-        if (Math.abs(de.getY() - r)>2){
-            //Rightup
+        if (Math.abs(de.getY() - r) > 2) {
+            //Right up
             if (goingRight && c - gx < 0 && r - gy > 0 && no_collision(c + 1, r - 1)) {
                 c += 1;
                 r -= 1;
                 available = true;
             }
-            // Rightdown
+            // Right down
             else if (goingRight && c - gx < 0 && r - gy < 0 && no_collision(c + 1, r + 1)) {
                 c += 1;
                 r += 1;
@@ -185,7 +179,6 @@ public class FollowingFish extends FishTankEntity {
 
 
     protected void turnToFace() {
-        //followee在左边,following fish 在往右边走--following fish 掉头
         if (de.getX() < this.getX() && goingRight) {
             goingRight = false;
             reverseAppearance();
@@ -195,6 +188,7 @@ public class FollowingFish extends FishTankEntity {
         }
     }
 
+
     /**
      * Causes this item to take its turn in the fish-tank simulation.
      */
@@ -202,46 +196,45 @@ public class FollowingFish extends FishTankEntity {
         int d = Math.abs(de.getY() - r) + Math.abs(de.getX() - c);
         //Approach
         if (d > 2) {
-            //决定方向
+            //decide direction
             turnToFace();
             boolean best = bestMove();
-            if (!best){
-                //左右有东西的时候停住
-                if (goingRight && c<=103 && this.no_collision(c+1,r)) {
-                    c += 1;//move left
-                } else if (!goingRight && c>=3&&this.no_collision(c-1,r)) {
-                    c -= 1;//move right
+            if (!best) {
+                // stop moving if have object at that location
+                if (goingRight && c <= 103 && this.no_collision(c + 1, r)) {
+                    c += 1;//move right
+                } else if (!goingRight && c >= 3 && this.no_collision(c - 1, r)) {
+                    c -= 1;//move left
                 }
 
-                //和ee的差距大于2，上下移动
-                if(Math.abs(de.getY() - r) > 2) {
-                    if(de.getY() < r&& r>=3&&this.no_collision(c,r-1)) {
+                // move up/down when dis >2
+                if (Math.abs(de.getY() - r) > 2) {
+                    if (de.getY() < r && r >= 3 && this.no_collision(c, r - 1)) {
                         r -= 1;//move up
-                    } else if (de.getY()>=r && r<=47 && this.no_collision(c,r+1)) {
+                    } else if (de.getY() >= r && r <= 47 && this.no_collision(c, r + 1)) {
                         r += 1;//move down
                     }
-                }}
+                }
+            }
             //testing
 
-        }
+        } else if (d == 2) {
 
-        else if (d == 2){
+            //Diagonal: move up/down
 
-            //调整斜着的:同列，空一格-->变成正上方
-
-            if(Math.abs(de.getY() - r) ==1 && Math.abs(de.getX() - c)==1) {
-                if(de.getY() < r&& r>=3&&this.no_collision(de.getX(),r+1)) {
-                    c=de.getX();
+            if (Math.abs(de.getY() - r) == 1 && Math.abs(de.getX() - c) == 1) {
+                if (de.getY() < r && r >= 3 && this.no_collision(de.getX(), r + 1)) {
+                    c = de.getX();
                     r += 1;//move down 远离
-                } else if (de.getY()>=r && r<=47 && this.no_collision(de.getX(),r-1)) {
-                    c=de.getX();
+                } else if (de.getY() >= r && r <= 47 && this.no_collision(de.getX(), r - 1)) {
+                    c = de.getX();
                     r -= 1;//move up 远离
                 }
             }
-            //调整横着的--变成斜着 --等下一轮变成竖着
-            if(Math.abs(de.getY() - r) ==0 &&Math.abs(de.getX() - c)==2){
+            // horizontal -- diagonal --- next round be vertical
+            if (Math.abs(de.getY() - r) == 0 && Math.abs(de.getX() - c) == 2) {
 
-                if(goingRight) {
+                if (goingRight) {
 
                     if (c <= 45 && r >= 3 && this.no_collision(c + 1, r - 1)) {
                         c += 1;
@@ -250,45 +243,79 @@ public class FollowingFish extends FishTankEntity {
                         c += 1;
                         r += 1;
                     }
-                }
-                else{
-                        if(c>=3&&r>=3&&this.no_collision(c-1,r-1)){
-                            c-=1;r-=1;}
-                        else if(c>=3&&r<=105&&this.no_collision(c-1,r+1)){
-                            c-=1;r+=1;}
+                } else {
+                    if (c >= 3 && r >= 3 && this.no_collision(c - 1, r - 1)) {
+                        c -= 1;
+                        r -= 1;
+                    } else if (c >= 3 && r <= 105 && this.no_collision(c - 1, r + 1)) {
+                        c -= 1;
+                        r += 1;
                     }
+                }
 
 
             }
 
-        }
-
-        else if (d<2){
-            //不能动就别动了
-            //moveup
+        } else if (d < 2) {
+            //don't move if can't
+            //move up
             //System.out.println(de.change_y);
-            if(de.change_y==-1&& r>=3 && this.no_collision(c,r-1)){
-                r-=1;
+            //y:-1
+            if (de.change_y == -1) {
+                //顶头在内部
+                if (r >= 3 && this.no_collision(c, r - 1)) {
+                    r -= 1;
+                }
+                //left
+                else if (c <= 105 && r <= 2 && !this.goingRight && this.no_collision(c + 1, r)) {
+                    goingRight = true;
+                    reverseAppearance();
+                    c += 1;
+                    goingRight = false;
+                    reverseAppearance();
+                } else if (c >= 3 && r <= 2 && this.goingRight && this.no_collision(c - 1, r)) {
+                    goingRight = false;
+                    reverseAppearance();
+                    c -= 1;
+                    goingRight = true;
+                    reverseAppearance();
+                }
 
-            }//move down
-            else if (de.change_y==1&& r<=45 && this.no_collision(c,r+1)){
-                r+=1;
+
+            }//move down y:1
+            else if (de.change_y == 1) {
+                if (r <= 45 && this.no_collision(c, r + 1)) {
+                    r += 1;
+                } else if (r >= 46 && c <= 105 && !this.goingRight && this.no_collision(c + 1, r)) {
+                    goingRight = true;
+                    reverseAppearance();
+                    c += 1;
+                    goingRight = false;
+                    reverseAppearance();
+                } else if (c >= 3 && r >= 46 && this.goingRight && this.no_collision(c - 1, r)) {
+                    goingRight = false;
+                    reverseAppearance();
+                    c -= 1;
+                    goingRight = true;
+                    reverseAppearance();
+                }
+
             }//move left
-            else if(de.change_x==-1&& r>=3 && this.no_collision(c-1,r)){
-                r-=1;
+            else if (de.change_x == -1 && c >= 3 && this.no_collision(c - 1, r)) {
+                c -= 1;
 
             }//move right
-            else if (de.change_x==1&& r<=45 && this.no_collision(c+1,r)){
-                r+=1;
+            else if (de.change_x == 1 && c <= 105 && this.no_collision(c + 1, r)) {
+                c += 1;
             }
 
 
         }
-        System.out.println("------Fish:"+de.getX()+" "+de.getY());
-        System.out.println("********following"+c+" "+r);
-        }
-
-
+        System.out.println("------Fish:" + de.getX() + " " + de.getY());
+        System.out.println("********following" + c + " " + r);
     }
+
+
+}
 
 

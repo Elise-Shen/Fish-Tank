@@ -30,18 +30,18 @@ public class FishTank {
     /**
      * The width (in entities) of the whole tank
      */
-    private static final int width = frameWidth/charWidth;
+    private static final int width = frameWidth / charWidth;
 
     /**
      * The height (in entities) of the whole tank
      */
-    private static final int height = frameHeight/charHeight;
+    private static final int height = frameHeight / charHeight;
 
 
     /**
      * (int)(640/6) columns, (int)(480/10) rows.
      */
-    private static FishTankEntity[][] entities =
+    private final static FishTankEntity[][] entities =
             new FishTankEntity[width][height];
 
     private static boolean running = true;
@@ -74,8 +74,8 @@ public class FishTank {
         addEntity(6, 22, new Fish());
         addEntity(10, 20, new HungryFish());
         //addEntity(10, 20, new FollowingFish((Fish)getEntity(23, 18)));
-        addEntity(5,10,new Fish());
-        addEntity(5, 9, new FollowingFish((Fish)getEntity(5, 10)));
+        addEntity(5, 10, new Fish());
+        addEntity(5, 9, new FollowingFish((Fish) getEntity(5, 10)));
 
         addEntity(24, 33, new Seaweed(6));
         addEntity(32, 25, new Seaweed(7));
@@ -86,7 +86,7 @@ public class FishTank {
         f.setLocation(10, 10);
         f.setVisible(true);
 
-        // Every .3 seconds, tell each item in the fishtank to take
+        // Every .3 seconds, tell each item in the fish tank to take
         // a turn.
         while (running) {
 
@@ -96,14 +96,14 @@ public class FishTank {
                     if (e != null) {
                         entities[x][y].update();
                         entities[x][y] = null;
-                        if(e.exists()) {
+                        if (e.exists()) {
                             entities[e.getX()][e.getY()] = e;
                         }
                     }
                 }
             }
 
-            // Tell the fishtank to redraw itself.
+            // Tell the fish tank to draw itself.
             f.repaint();
 
             // Wait .3 seconds before redoing the queue.

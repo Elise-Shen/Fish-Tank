@@ -1,4 +1,5 @@
 package fishtank;
+
 import java.awt.*;
 
 /**
@@ -6,21 +7,33 @@ import java.awt.*;
  */
 public class Bubble extends FishTankEntity {
 
-    /** How this bubble appears on the screen. */
+    /**
+     * How this bubble appears on the screen.
+     */
     private String appearance;
 
-    /** The font used to draw instances of this class. */
-    static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    /**
+     * The font used to draw instances of this class.
+     */
+    final static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
-    /** My colour. Ah, the vagaries of British vs. US spelling. */
-    Color colour;
+    /**
+     * My colour. Ah, the vagaries of British vs. US spelling.
+     */
+    final Color colour;
 
-    /** Use for random movement left and right.  */
+    /**
+     * Use for random movement left and right.
+     */
     public double d;
 
-    /** This bubble's first coordinate. */
+    /**
+     * This bubble's first coordinate.
+     */
     int x;
-    /** This bubble's second coordinate. */
+    /**
+     * This bubble's second coordinate.
+     */
     protected int y;
 
     /**
@@ -35,8 +48,9 @@ public class Bubble extends FishTankEntity {
 
     /**
      * Set this item's location.
+     *
      * @param a the first coordinate.
-     * @param b  the second coordinate.
+     * @param b the second coordinate.
      */
     public void setLocation(int a, int b) {
         // set x to a
@@ -59,29 +73,27 @@ public class Bubble extends FishTankEntity {
      * Draws the given string in the given graphics context at
      * at the given cursor location.
      *
-     * @param  g  the graphics context in which to draw the string.
-     * @param  s  the string to draw.
-     * @param  x  the x-coordinate of the string's cursor location.
-     * @param  y  the y-coordinate of the string's cursor location.
+     * @param g the graphics context in which to draw the string.
+     * @param s the string to draw.
+     * @param x the x-coordinate of the string's cursor location.
+     * @param y the y-coordinate of the string's cursor location.
      */
     void drawString(Graphics g, String s, int x, int y) {
         g.setColor(colour);
         g.setFont(FONT);
         FontMetrics fm = g.getFontMetrics(FONT);
-        g.drawString(s, y*fm.charWidth('W'), x*fm.getAscent());
+        g.drawString(s, y * fm.charWidth('W'), x * fm.getAscent());
     }
 
 
     /**
      * Draws this fish tank item.
      *
-     * @param  g  the graphics context in which to draw this item.
+     * @param g the graphics context in which to draw this item.
      */
     void draw(Graphics g) {
         drawString(g, appearance, y, x);
     }
-
-
 
 
     /**
@@ -92,29 +104,11 @@ public class Bubble extends FishTankEntity {
 
         // Move upwards.
         y--;
-        x = x; // no change left or right
+        // no change left or right
 
         // Figure out whether to grow, if at all.
         d = Math.random();
-        // Oocasinally change a . to a o or a o to a O
-        if (d < 0.05) {
-            // If the appearance is a ., change it to an o
-            if (appearance.equals("."))appearance="o";
-                // If the appearance is an o, change it to a O
-            else if (appearance.equals("o"))appearance="O";
-        }
-    }    /**
-     * Causes this item to take its turn in the fish-tank simulation, moving up and left.
-     */
-    public void floatLeftUp() {
 
-        // Move upwards.
-        y--;
-        x -= 1; //left
-
-        // Figure out whether to grow, if at all.
-        d = Math.random();
-        // Oocasinally change a . to a o or a o to a O
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
             if (appearance.equals(".")) appearance = "o";
@@ -122,46 +116,65 @@ public class Bubble extends FishTankEntity {
             else if (appearance.equals("o")) appearance = "O";
         }
     }
+
+    /**
+     * Causes this item to take its turn in the fish-tank simulation, moving up and left.
+     */
+    public void floatLeftUp() {
+        //System.out.println("left up");
+        // Move upwards.
+        y--;
+        x -= 1; //left
+
+        // Figure out whether to grow, if at all.
+        d = Math.random();
+
+        if (d < 0.05) {
+            // If the appearance is a ., change it to an o
+            if (appearance.equals(".")) appearance = "o";
+                // If the appearance is an o, change it to a O
+            else if (appearance.equals("o")) appearance = "O";
+        }
+    }
+
     /**
      * Causes this item to take its turn in the fish-tank simulation.
      */
     public void floatRightUp() {
-
+        //System.out.println("right up");
         // Move upwards.
         y--;
         x += 1;// right
         // Figure out whether to grow, if at all.
         d = Math.random();
-        // Oocasinally change a . to a o or a o to a O
+
         if (d < 0.05) {
             // If the appearance is a ., change it to an o
-            if (appearance.equals("."))appearance="o";
+            if (appearance.equals(".")) appearance = "o";
                 // If the appearance is an o, change it to a O
-            else if (appearance.equals("o"))appearance="O";
+            else if (appearance.equals("o")) appearance = "O";
         }
     }
 
     public void update() {
         d = Math.random();
         //add test collision
-        int c=0;
-        if (d < 0.33 && y>=2 && this.no_collision(x,y-1)) {
+        //int c=0;
+        if (d < 0.33 && y >= 2 && this.no_collision(x, y - 1)) {
             floatStraightUp();
-        } else if (0.33<=d && d < 0.66 && y>=2 && x<=104 && this.no_collision(x+1,y-1)) {
+        } else if (0.33 <= d && d < 0.66 && y >= 2 && x <= 104 && this.no_collision(x + 1, y - 1)) {
             floatRightUp();
-        } else if(0.66<=d&&d<1 && y>=2 && x>=2 && this.no_collision(x-1,y-1)) {
+        } else if (0.66 <= d && d < 1 && y >= 2 && x >= 2 && this.no_collision(x - 1, y - 1)) {
             floatLeftUp();
         }
 
-        //System.out.println("in bubble, aftermove"+x+" "+y);
-        //如果设有y<=1，那么nocollision(x,1-1)会与frame相撞,就永远不会上移动,-can't deleted
+
         //System.out.println("num"+x+" "+y);
-        if (y<=3){
+        if (y <= 3) {
             this.delete();
             //
-        }
-        else if(x>=105 || x<=1){
-            //System.out.println("deleted")
+        } else if (x >= 105 || x <= 1) {
+            //System.out.println("deleted");
             this.delete();
         }
     }

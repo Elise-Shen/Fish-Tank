@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * In Java, an "abstract class" is just a class that doesn't implement
  * some of its methods.
- *
+ * <p>
  * In CSC148, you've seen things like this before, where every method in a class
  * simply raised a NotImplementedError. Those are also called abstract classes,
  * and fulfill a similar purpose (try replacing a usage of FishTankEntity with
@@ -13,15 +13,14 @@ import java.util.ArrayList;
  */
 public abstract class FishTankEntity {
 
-    private boolean exists = true;
-
-
-    abstract void update();
-    abstract void setLocation(int x, int y);
-    static ArrayList<Integer> seaweed_c = new ArrayList<Integer>();
+    final static ArrayList<Integer> seaweed_c = new ArrayList<>();
     int change_x;
     int change_y;
+    private boolean exists = true;
 
+    abstract void update();
+
+    abstract void setLocation(int x, int y);
 
     void delete() {
         exists = false;
@@ -31,20 +30,21 @@ public abstract class FishTankEntity {
     boolean exists() {
         return this.exists;
     }
-    void setExists(boolean exists_test){
-        this.exists=exists_test;
+
+    void setExists(boolean exists_test) {
+        this.exists = exists_test;
     }
 
     abstract int getX();
+
     abstract int getY();
 
-    public boolean no_collision(int x,int y){
+    public boolean no_collision(int x, int y) {
         // return True if there's no collision
         boolean check = false;
-        //在画布内且null --- true---excecute
-            if (FishTank.getEntity(x,y)==null){
-                check = true;
-            }
+        if (FishTank.getEntity(x, y) == null) {
+            check = true;
+        }
 
         return check;
     }
