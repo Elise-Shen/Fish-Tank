@@ -79,20 +79,22 @@ public class FishTest {
 
         int count = 0;
         for (int j  = 10; j < 35; j++) {
-            for (int i = 0; i < 40; i++) {
-                fish.setLocation(j,0);
+            for (int a = 2; a < 40; a++) {
+                fish.setLocation(j,a);
                 fish.goingRight =
                         false;
                 fish.update();
             }
-            for (int z = 0; z < 40;z++) {
-                FishTankEntity e = FishTank.getEntity(j,z);
+            for (int z = 2; z < 40;z++) {
+                FishTankEntity e = FishTank.getEntity(j-1,z);
                 if (e instanceof Bubble) {
                     count ++;
                 }
             }
         }
-        boolean runTenPercentOfTime = (count>=50 && count<=150);
+        System.out.println(count);
+
+        boolean runTenPercentOfTime = (count>=44 && count<=133);
         assertTrue(runTenPercentOfTime);
     }
     //4. collision
@@ -158,7 +160,7 @@ public class FishTest {
         assertTrue("turn around when right has obj",check);
     }
     //collision at boundry
-    
+
 
 
 

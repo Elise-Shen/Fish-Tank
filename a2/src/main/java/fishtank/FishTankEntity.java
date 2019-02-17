@@ -42,11 +42,10 @@ public abstract class FishTankEntity {
         // return True if there's no collision
         boolean check = false;
         //在画布内且null --- true---excecute
-        if (x>=2 && x<=104 && y<=46 && y>=2){
             if (FishTank.getEntity(x,y)==null){
                 check = true;
             }
-        }
+
         return check;
     }
 }

@@ -164,7 +164,7 @@ public class Fish extends FishTankEntity {
         }
     }
     public void change_seaweed(Seaweed e){
-        if ((e.getY()-r)<=e.l && (e.getY()-r)>=2){
+        if ((e.getY()-r)<=e.l && (e.getY()-r)>=1){
             //System.out.println(c+"！！！！！！！！！changed");
             e.l=e.getY()-r;
 

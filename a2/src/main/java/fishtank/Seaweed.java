@@ -151,7 +151,7 @@ public class Seaweed extends FishTankEntity {
     leanRight  =!leanRight;
 
     //go back to original length
-    if (count_up==20){
+    if (count_up==200){
       //System.out.println("oooooooo"+l+"sssss "+l_original);
       l=l_original;
       //System.out.println("lllllllll"+l);
