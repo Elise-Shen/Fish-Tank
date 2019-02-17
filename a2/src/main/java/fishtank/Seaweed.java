@@ -9,23 +9,23 @@ public class Seaweed extends FishTankEntity {
     /**
      * The font used to draw instances of this class.
      */
-    final static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    final private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 
     /**
      * The number of weed segments.
      */
-    int l;
+    private int l;
 
     /**
      * Indicates whether the bottom segment is leaning right.
      */
-    boolean leanRight;
+    private boolean leanRight;
 
     /**
      * My colour. Ah,the vagaries of British vs. US spelling.
      */
-    final Color colour;
+    private final Color colour;
 
     /**
      * This bubble's first coordinate.
@@ -36,9 +36,9 @@ public class Seaweed extends FishTankEntity {
      */
     private int my_curr_col;
 
-    final int l_original;
+    private final int l_original;
     //int l_original=15;
-    public int count_up = 0;
+    private int count_up = 0;
 
 
     /**
@@ -55,9 +55,15 @@ public class Seaweed extends FishTankEntity {
         colour = Color.green.darker().darker();
     }
 
+    public int get_loriginal(){return l_original;}
     public int getLenght() {
         return l;
     }
+    public int getCount_up(){return count_up;}
+    public void setLenght(int len){
+        this.l = len;
+    }
+    public void setCountup(int c){count_up = c;}
 
 
     /**
@@ -169,7 +175,7 @@ public class Seaweed extends FishTankEntity {
         //go back to original length
         if (count_up == 200) {
             l = l_original;
-            count_up = 0;//恢复，等下一次变化
+            count_up = 0;
         }
     }
 

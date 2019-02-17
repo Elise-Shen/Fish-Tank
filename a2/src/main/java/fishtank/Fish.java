@@ -10,17 +10,17 @@ public class Fish extends FishTankEntity {
     /**
      * How this fish appears on the screen.
      */
-    String appearance;
+    private String appearance;
 
     /**
      * Indicates whether this fish is moving right.
      */
-    boolean goingRight;
+    private boolean goingRight;
 
     /**
      * This fish's first coordinate.
      */
-    int r;
+    private int r;
     /**
      * This fish's second coordinate.
      */
@@ -28,7 +28,7 @@ public class Fish extends FishTankEntity {
     /**
      * The colour of this fish.
      */
-    final Color colour;
+    private final Color colour;
 
 
     /**
@@ -148,10 +148,14 @@ public class Fish extends FishTankEntity {
         this.goingRight = goingRight;
     }
 
+    public boolean getGoingRight() {
+        return this.goingRight;
+    }
+
     /**
      * The font used to draw instances of this class.
      */
-    final static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    final private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 
     /**
@@ -192,9 +196,9 @@ public class Fish extends FishTankEntity {
     }
 
     public void change_seaweed(Seaweed e) {
-        if ((e.getY() - r) <= e.l && (e.getY() - r) >= 1) {
+        if ((e.getY() - r) <= e.getLenght() && (e.getY() - r) >= 1) {
             //System.out.println(c+"！！！！！！！！！changed");
-            e.l = e.getY() - r;
+            e.setLenght(e.getY() - r);
 
         }
     }

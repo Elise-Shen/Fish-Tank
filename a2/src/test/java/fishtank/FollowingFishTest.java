@@ -28,7 +28,7 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(30,3) to (30,28)
         follower.setLocation(30, 3);
-        System.out.println(follower.c + " " + follower.r);
+        System.out.println(follower.getX() + " " + follower.getX());
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -44,7 +44,7 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(30,40) to (20, 28)
         follower.setLocation(30, 40);
-        System.out.println(follower.c + " " + follower.r);
+        System.out.println(follower.getX() + " " + follower.getY());
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -60,7 +60,7 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(20, 30) to (30, 32)
         follower.setLocation(20, 30);
-        System.out.println(follower.c + " " + follower.r);
+        System.out.println(follower.getX() + " " + follower.getY());
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -76,7 +76,7 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(39, 30) to (30, 28)
         follower.setLocation(39, 30);
-        System.out.println(follower.c + " " + follower.r);
+        System.out.println(follower.getX() + " " + follower.getY());
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -92,7 +92,6 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(20, 20) to (30, 28)
         follower.setLocation(20, 20);
-        System.out.println(follower.c + " " + follower.r);
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -108,7 +107,6 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(20, 40) to (30, 32)
         follower.setLocation(20, 40);
-        System.out.println(follower.c + " " + follower.r);
 
         for (int i = 0; i < 100; i++) {
             follower.update();
@@ -125,7 +123,6 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(20, 40) to (30, 32)
         follower.setLocation(20, 40);
-        System.out.println(follower.c + " " + follower.r);
 
         for (int i = 0; i < 100; i++) {
             follower.update();
@@ -142,7 +139,6 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(40, 40) to (30, 28)
         follower.setLocation(40, 40);
-        System.out.println(follower.c + " " + follower.r);
 
         for (int i = 0; i < 100; i++) {
             follower.update();
@@ -160,7 +156,6 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(29,29) to ()
         follower.setLocation(29, 29);
-        System.out.println(follower.c + " " + follower.r);
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -176,7 +171,6 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(31, 29) to (30, 32)
         follower.setLocation(31, 31);
-        System.out.println(follower.c + " " + follower.r);
 
         for (int i = 0; i < 100; i++) {
             follower.update();
@@ -193,7 +187,7 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(29, 31) to (30, 32)
         follower.setLocation(29, 31);
-        System.out.println(follower.c + " " + follower.r);
+        //System.out.println(follower.c + " " + follower.r);
 
         for (int i = 0; i < 100; i++) {
             follower.update();
@@ -210,7 +204,7 @@ public class FollowingFishTest {
         //it should take exactly 15 updates to get from
         //(31, 31) to (30, 28)
         follower.setLocation(31, 31);
-        System.out.println(follower.c + " " + follower.r);
+        //System.out.println(follower.c + " " + follower.r);
 
         for (int i = 0; i < 100; i++) {
             follower.update();
@@ -229,7 +223,7 @@ public class FollowingFishTest {
         //(30,29)
         f.change_y = -1;
         follower.setLocation(30, 29);
-        System.out.println(follower.c + " " + follower.r);
+        // System.out.println(follower.c + " " + follower.r);
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -246,7 +240,7 @@ public class FollowingFishTest {
         //(30,31)
         f.change_y = 1;
         follower.setLocation(30, 31);
-        System.out.println(follower.c + " " + follower.r);
+        //System.out.println(follower.c + " " + follower.r);
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -263,7 +257,7 @@ public class FollowingFishTest {
         //(29,30)
         f.change_x = -1;
         follower.setLocation(29, 30);
-        System.out.println(follower.c + " " + follower.r);
+        //System.out.println(follower.c + " " + follower.r);
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -280,7 +274,7 @@ public class FollowingFishTest {
         //(31, 30) to (30, 28)
         f.change_x = 1;
         follower.setLocation(31, 30);
-        System.out.println(follower.c + " " + follower.r);
+        //System.out.println(follower.c + " " + follower.r);
         for (int i = 0; i < 100; i++) {
             follower.update();
         }
@@ -297,7 +291,7 @@ public class FollowingFishTest {
         //(31, 30) to (30, 28)
         f.change_x = -1;
         follower.setLocation(3, 4);
-        System.out.println(follower.c + " " + follower.r);
+        //System.out.println(follower.c + " " + follower.r);
         for (int i = 0; i < 100; i++) {
             follower.update();
         }

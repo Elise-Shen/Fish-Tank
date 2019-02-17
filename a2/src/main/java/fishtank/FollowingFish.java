@@ -10,21 +10,21 @@ public class FollowingFish extends FishTankEntity {
     /**
      * How this fish appears on the screen.
      */
-    public final String appearance;
+    private final String appearance;
 
     /**
      * Indicates whether this fish is moving right.
      */
-    boolean goingRight;
+    private boolean goingRight;
 
     /**
      * This fish's first coordinate.
      */
-    int r;
+    private int r;
     /**
      * This fish's second coordinate.
      */
-    int c;
+    private int c;
     /**
      * The colour of this fish.
      */
@@ -34,7 +34,7 @@ public class FollowingFish extends FishTankEntity {
      * The entity that our fish is following
      */
 
-    final Fish de;
+    private final Fish de;
 
 
     /**
@@ -47,7 +47,7 @@ public class FollowingFish extends FishTankEntity {
         de = f;
     }
 
-
+    //public boolean getGoingRight(){return goingRight;}
     /**
      * Set this item's location.
      *
@@ -114,7 +114,7 @@ public class FollowingFish extends FishTankEntity {
     /**
      * The font used to draw instances of this class.
      */
-    final static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    final private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 
     /**

@@ -27,12 +27,12 @@ public class SeaweedTest {
         boolean check = false;
         for (int i = 0; i <= 5; i++) {
             fish.setLocation(29, 29);
-            fish.goingRight = true;
+            fish.setGoingRight(true);
             fish.update();
             seaweed.update();
             System.out.println(fish.getX() + " " + fish.getY());
-            System.out.println(seaweed.l);
-            if (seaweed.l == 30 - fish.getY()) {
+            System.out.println(seaweed.getLenght());
+            if (seaweed.getLenght() == 30 - fish.getY()) {
                 check = true;
                 break;
             }
@@ -47,13 +47,13 @@ public class SeaweedTest {
         boolean check = false;
         for (int i = 0; i <= 5; i++) {
             fish.setLocation(29, 29);
-            fish.goingRight = true;
+            fish.setGoingRight(true);
             fish.update();
             seaweed.update();
             seaweed2.update();
             System.out.println(fish.getX() + " " + fish.getY());
-            System.out.println(seaweed.l + " " + seaweed2.l);
-            if (seaweed.l == 30 - fish.getY() && seaweed2.l == 31 - fish.getY()) {
+            System.out.println(seaweed.getLenght() + " " + seaweed2.getLenght());
+            if (seaweed.getLenght() == 30 - fish.getY() && seaweed2.getLenght() == 31 - fish.getY()) {
                 check = true;
                 break;
             }
@@ -63,11 +63,11 @@ public class SeaweedTest {
 
     @Test
     public void seaweed_test_recover() {
-        seaweed.l = 1;
-        seaweed.count_up = 199;
+        seaweed.setLenght(1);
+        seaweed.setCountup(199);
         seaweed.update();
         boolean check = false;
-        if (seaweed.l == 5) {
+        if (seaweed.getLenght() == 5) {
             check = true;
         }
         assertTrue("length recovered", check);

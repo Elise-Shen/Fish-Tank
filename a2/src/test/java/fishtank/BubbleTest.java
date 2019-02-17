@@ -99,7 +99,6 @@ public class BubbleTest {
 
     @Test
     public void bubble_destroy_xLeft() {
-        //可能会不动
 
         FishTank.addEntity(2, 9, new Seaweed(1));
         FishTank.addEntity(3, 9, new Seaweed(1));

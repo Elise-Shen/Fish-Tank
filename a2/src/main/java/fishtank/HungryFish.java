@@ -10,21 +10,21 @@ public class HungryFish extends FishTankEntity {
     /**
      * How this fish appears on the screen.
      */
-    public String appearance;
+    private String appearance;
 
     /**
      * Indicates whether this fish is moving right.
      */
-    boolean goingRight;
+    private boolean goingRight;
 
     /**
      * This fish's first coordinate.
      */
-    int r;
+    private int r;
     /**
      * This fish's second coordinate.
      */
-    int c;
+    private int c;
     /**
      * The colour of this fish.
      */
@@ -40,7 +40,7 @@ public class HungryFish extends FishTankEntity {
         goingRight = true;
     }
 
-
+    public boolean getGoingRight(){return goingRight;}
     /**
      * Set this item's location.
      *
@@ -66,8 +66,6 @@ public class HungryFish extends FishTankEntity {
      */
     protected void blowBubble() {
         Bubble b = new Bubble();
-        //顶部：一般向下
-        //其他：向上
         int a;
         if (r == 0) {
             a = r + 1;
@@ -153,7 +151,7 @@ public class HungryFish extends FishTankEntity {
     /**
      * The font used to draw instances of this class.
      */
-    final static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    final private static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
 
     /**
@@ -186,7 +184,7 @@ public class HungryFish extends FishTankEntity {
     /**
      * Causes this item to take its turn in the fish-tank simulation.
      */
-    //看是否在海草的范围内
+
     public void find_seaweed() {
         System.out.println(seaweed_c);
         for (int i = 1; i <= 46 - r; i++) {
@@ -198,9 +196,9 @@ public class HungryFish extends FishTankEntity {
     }
 
     public void change_seaweed(Seaweed e) {
-        if ((e.getY() - r) <= e.l && (e.getY() - r) >= 2) {
+        if ((e.getY() - r) <= e.getLenght() && (e.getY() - r) >= 2) {
             System.out.println(c + "！！！！！！！！！changed");
-            e.l = e.getY() - r;
+            e.setLenght(e.getY() - r);
 
         }
     }
@@ -249,7 +247,7 @@ public class HungryFish extends FishTankEntity {
         }
 
 
-        // 5. Figure out whether to move up or down, or neither.上下有东西就不动
+        // 5. Figure out whether to move up or down, or neither.
         d = Math.random();
         if (d < 0.1 && r <= 47 && this.no_collision(c, r + 1)) {
             r += 1;
@@ -259,8 +257,7 @@ public class HungryFish extends FishTankEntity {
             change_y = -1;
         }
 
-        //到这里接下来要去的（)
-        //column中有海草根
+
         if (seaweed_c.contains(c)) {
             find_seaweed();
         }

@@ -15,26 +15,26 @@ public class Bubble extends FishTankEntity {
     /**
      * The font used to draw instances of this class.
      */
-    final static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
+    private final static Font FONT = new Font("Monospaced", Font.PLAIN, 10);
 
     /**
      * My colour. Ah, the vagaries of British vs. US spelling.
      */
-    final Color colour;
+    private final Color colour;
 
     /**
      * Use for random movement left and right.
      */
-    public double d;
+    private double d;
 
     /**
      * This bubble's first coordinate.
      */
-    int x;
+    private int x;
     /**
      * This bubble's second coordinate.
      */
-    protected int y;
+    private int y;
 
     /**
      * Constructs a new bubble at the specified cursor location (x, y).
@@ -68,6 +68,7 @@ public class Bubble extends FishTankEntity {
     int getY() {
         return y;
     }
+
 
     /**
      * Draws the given string in the given graphics context at

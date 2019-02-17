@@ -29,14 +29,14 @@ public class FishTest {
     public void turnAroundRight() {
         fish.setGoingRight(false);
         fish.turnAround();
-        assertTrue("no change from left to right", fish.goingRight);
+        assertTrue("no change from left to right", fish.getGoingRight());
     }
 
     @Test
     public void turnAroundLeft() {
         fish.setGoingRight(true);
         fish.turnAround();
-        assertTrue("no change from left to right", !fish.goingRight);
+        assertTrue("no change from left to right", !fish.getGoingRight());
     }
 
     //2 going right
@@ -44,14 +44,14 @@ public class FishTest {
     public void testGoingRightTrue() {
         //true - true
         fish.setGoingRight(true);
-        assertTrue("testGoingRightFail", fish.goingRight);
+        assertTrue("testGoingRightFail", fish.getGoingRight());
     }
 
     @Test
     public void testGoingRightTrueFalse() {
         //true - true
         fish.setGoingRight(false);
-        assertTrue("testGoingRightFail", !fish.goingRight);
+        assertTrue("testGoingRightFail", !fish.getGoingRight());
     }
 
     @Test
@@ -63,8 +63,7 @@ public class FishTest {
         boolean bubbleMade = false;
         for (int i = 0; i < 200; i++) {
             fish.setLocation(5, 10);
-            fish.goingRight =
-                    false; //notice: I can edit package private attributes!
+            fish.setGoingRight(false);//notice: I can edit package private attributes!
             fish.update();
             System.out.println(fish.getX() + " " + fish.getY());
             //fish should move one tile left and eventually blow a bubble.
@@ -87,8 +86,7 @@ public class FishTest {
         for (int j = 10; j < 35; j++) {
             for (int a = 2; a < 40; a++) {
                 fish.setLocation(j, a);
-                fish.goingRight =
-                        false;
+                fish.setGoingRight(false);
                 fish.update();
             }
             for (int z = 2; z < 40; z++) {
@@ -112,9 +110,9 @@ public class FishTest {
         boolean check = false;
         for (int i = 0; i < 200; i++) {
             fish.setLocation(29, 30);
-            fish.goingRight = true;
+            fish.setGoingRight(true);
             fish.update();
-            if (!fish.goingRight) {
+            if (!fish.getGoingRight()) {
                 check = true;
                 break;
             }
@@ -135,9 +133,9 @@ public class FishTest {
         boolean check = false;
         for (int i = 0; i < 200; i++) {
             fish.setLocation(28, 29);
-            fish.goingRight = true;
+            fish.setGoingRight(true);
             fish.update();
-            System.out.println(fish.getX() + " " + fish.r);
+            System.out.println(fish.getX() + " " + fish.getY());
             if (fish.getX() == 29 && fish.getY() == 29) {
                 check = true;
                 break;
@@ -158,10 +156,10 @@ public class FishTest {
         for (int i = 0; i < 200; i++) {
 
             fish.setLocation(2, 2);
-            fish.goingRight = false;
+            fish.setGoingRight(false);
             fish.update();
             //System.out.println(fish.getX()+" "+fish.r);
-            if (fish.goingRight) {
+            if (fish.getGoingRight()) {
                 check = true;
                 break;
             }
