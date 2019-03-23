@@ -9,11 +9,11 @@ public class FishTank {
     /**
      * The width of a character.
      */
-    public final static int charWidth = 6;
+    public  static int charWidth = 6;
     /**
      * The height of a character.
      */
-    public final static int charHeight = 10;
+    public  static int charHeight = 10;
     /**
      * (int)(640/6) columns, (int)(480/10) rows.
      */
