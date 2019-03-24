@@ -13,6 +13,7 @@ public class SeaweedTest {
 
     @Before
     public void setUp() {
+        TestUtilities.clearWholeFishtank();
         seaweed = new Seaweed(5);
         FishTank.addEntity(30, 30, seaweed);
         System.out.println(FishTank.getEntity(30, 30) instanceof Seaweed);

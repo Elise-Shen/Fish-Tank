@@ -21,6 +21,7 @@ public class HungryFishTest {
 
     @Before
     public void setUp() {
+        TestUtilities.clearWholeFishtank();
         fish = new HungryFish();
     }
 

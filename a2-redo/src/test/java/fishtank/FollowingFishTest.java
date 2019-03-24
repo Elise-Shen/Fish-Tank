@@ -14,6 +14,7 @@ public class FollowingFishTest {
 
     @Before
     public void setUp() {
+        TestUtilities.clearWholeFishtank();
         f = mock(Fish.class);
         when(f.getX()).thenReturn(30);
         when(f.getY()).thenReturn(30);

@@ -11,6 +11,7 @@ public class BubbleTest {
 
     @Before
     public void setUp() {
+        TestUtilities.clearWholeFishtank();
         bubble = new Bubble();
     }
 
